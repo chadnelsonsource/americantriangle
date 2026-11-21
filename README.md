@@ -65,5 +65,5 @@ Our long-term direction is to become a trusted technology partner for organizati
 
 ---
 
-**Americantriangle (AMR)**  
+**Americantriangle**  
 *Three Pillars. One Intelligence Ecosystem.*
