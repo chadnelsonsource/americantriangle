@@ -1,0 +1,30 @@
+---
+description: Americantriangle design system and UI requirements
+alwaysApply: true
+---
+
+# UI design
+
+Use one shared component library for the public site, contributor workspace, client portal, and internal operations. Do not fork the same control per dashboard.
+
+Brand direction is a restrained, premium technology aesthetic: AI infrastructure, engineering excellence, human expertise, trust, and enterprise readiness. Do not copy another company's identity. Concrete tokens, logo, and color are Step 4. Do not invent them early.
+
+## Rules
+
+- Build reusable variants. Keep business logic out of presentational components.
+- Support keyboard access, visible focus, responsive layout, and light and dark themes.
+- Use semantic headings, accessible names, and alt text for informative images.
+- Prefer a clear hierarchy and consistent spacing over decoration.
+- Avoid generic AI imagery, excessive gradients, glowing brain illustrations, and template-like marketing layouts.
+- Do not invent customer logos, testimonials, revenue, headcount, certifications, partnerships, or performance statistics.
+- Do not put demo data on production screens. Label development-only UI.
+
+```tsx
+// Bad: a second button implementation inside one dashboard
+export function ClientPrimaryButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
+  return <button className="bg-blue-500" {...props} />;
+}
+
+// Good: the shared button, with a variant
+<Button variant="primary">Request a consultation</Button>
+```

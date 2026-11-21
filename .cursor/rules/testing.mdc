@@ -1,0 +1,26 @@
+---
+description: Americantriangle testing and verification standards
+alwaysApply: true
+---
+
+# Testing
+
+Planned tools are Vitest for unit and integration tests and Playwright for browser tests. Do not install them until the roadmap step that adds the toolchain. Database policy tests cover Row Level Security and tenant isolation once the schema exists.
+
+## Rules
+
+- Add tests for important business logic and permissions with the feature, not after launch.
+- Cover happy paths, invalid input, missing permissions, and duplicate or retried side effects for payments, webhooks, and exclusive assignments.
+- Negative tests must show that unauthorized access is denied. Hidden navigation is not a passing test.
+- Do not declare production readiness while critical security or data-integrity tests are unrun.
+- After each implementation step, run the relevant tests, type check, lint, and build when those commands exist.
+- Report commands run, results, and what could not be verified.
+- Metrics and dashboards must trace to stored records. Do not hardcode demo numbers and treat them as production metrics.
+
+```typescript
+// Bad: a test that only checks the button is hidden
+expect(screen.queryByRole("link", { name: "Finance" })).toBeNull();
+
+// Good: the server rejects the same user
+await expect(readPayoutBatch(contributorSession, batchId)).rejects.toThrow(ForbiddenError);
+```

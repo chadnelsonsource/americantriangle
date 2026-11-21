@@ -2,22 +2,39 @@
 
 **Building Intelligence. Engineering Possibility.**
 
-Americantriangle is an AI technology platform focused on two core divisions:
+Americantriangle is an AI technology company with three complementary divisions. A customer can use one division or combine them.
 
-### 1. AI Data & Model Training
-- Expert data annotation and preparation
-- Human feedback and model evaluation
-- AI training data operations
-- Expert contributor network
-- Quality assurance and benchmarking
+### 1. AI Data Infrastructure
+- Data collection and annotation
+- Human feedback and preference data
+- Training-data preparation
+- Curation and quality review
 
-### 2. Enterprise AI Engineering
-- AI strategy and consulting
+### 2. AI Model Training, Research & Evaluation
+- Model testing and evaluation
+- Training and fine-tuning, scoped as an engagement
+- Research and benchmarking
+- Safety, alignment, and red-team review
+
+### 3. Enterprise AI Applications
+- AI agents and automation
 - Custom AI applications
-- LLMs, RAG, and AI agents
-- Intelligent workflow automation
-- Enterprise integrations and deployment
+- Enterprise integrations
+- Deployment and operations
 
-Our goal is to connect human expertise, AI data infrastructure, and advanced engineering to help organizations build better AI systems.
+The public site describes these divisions. Model evaluation is a current service. Training, research, and red-team work are scoped engagements, not a foundation-model training platform.
 
-**Project status:** Initial development and architecture planning.
+**Project status:** Application foundation is in the repository. Production launch is not complete. See `docs/DEVELOPMENT_STATUS.md`.
+
+## Development
+
+```bash
+npm install
+npm run dev
+npm test
+npm run lint
+npm run typecheck
+npm run build
+```
+
+Copy `.env.example` to `.env.local` before connecting Supabase, Stripe, email, or a model provider. The public site runs without those values. Workspace data stays empty until a database is configured. Do not commit `.env.local`.

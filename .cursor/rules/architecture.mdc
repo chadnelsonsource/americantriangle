@@ -1,0 +1,31 @@
+---
+description: Americantriangle architecture and coding standards
+alwaysApply: true
+---
+
+# Architecture
+
+The approved shape is a modular monolith. The stack below is the target. It is not installed until the roadmap step that adds it. See `docs/DEVELOPMENT_STATUS.md`.
+
+Next.js App Router, React, TypeScript strict mode, PostgreSQL through Supabase, Supabase Auth, Supabase Storage, Tailwind CSS, shadcn/ui, Zod, Inngest, Stripe, Resend, Sentry, PostHog, Vitest, Playwright.
+
+## Domains
+
+Identity and Access, Organizations, Contributors, Assessments, Projects, Tasks, Submissions, Quality Assurance, AI Integrations, Enterprise Delivery, Billing and Payments, Notifications, File Management, Analytics, Administration, Audit and Compliance.
+
+## Rules
+
+- Keep business logic in domain services, not UI components.
+- Organize code by domain: `src/app`, `src/components`, `src/features`, `src/lib`, `src/server`, `src/services`, `src/types`, `src/config`, `src/hooks`, `src/styles`, `supabase/migrations`, `supabase/seed`.
+- Change schema only through SQL migrations.
+- Do not add a dependency or a service boundary without a stated need.
+- Do not introduce microservices unless a specific requirement is approved.
+- Do not change this stack without explaining why and requesting approval.
+
+```typescript
+// Bad: a business rule lives in the component
+if (user.role === "admin") await approveEarnings(id);
+
+// Good: the UI calls a server operation that authorizes and applies the rule
+await approveEarningsAction(id);
+```

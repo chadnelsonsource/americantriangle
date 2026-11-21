@@ -1,0 +1,31 @@
+---
+description: Americantriangle security and authorization requirements
+alwaysApply: true
+---
+
+# Security
+
+Authorize every protected operation on the server. A hidden link or a client-side role check is not access control.
+
+## Rules
+
+- Verify identity, role, organization membership, and resource access on the server.
+- Enforce tenant isolation. One client organization must not read another organization's data.
+- Plan for PostgreSQL Row Level Security on tenant and personal data.
+- Never send secret keys, privileged credentials, or the Supabase service-role key to the browser.
+- Validate all external input on the server.
+- Use transactions when related writes must succeed or fail together.
+- Make financial operations and inbound webhooks idempotent. Verify webhook signatures.
+- Do not store card numbers or sensitive banking credentials.
+- Do not mark work paid because an invoice was created. Keep work approval, earnings calculation, earnings approval, payout initiation, and payout confirmation separate.
+- Do not send private customer data to an external AI provider without authorization and a configured data-handling policy.
+- Do not invent certifications, customer proof, or legal claims.
+
+```typescript
+// Bad: the browser decides and the service role key is exposed
+const supabase = createClient(url, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY);
+
+// Good: a server-only client uses the privileged key, after an authorization check
+const supabase = createServerClient(); // server module, key is not NEXT_PUBLIC_
+await assertCanReadProject(session, projectId);
+```
