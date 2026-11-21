@@ -1,8 +1,8 @@
-# Americantriangle (AMR)
+# Americantriangle
 
 **Building Intelligence. Engineering Possibility.**
 
-Americantriangle (AMR) is an AI technology company focused on connecting data infrastructure, AI research, and enterprise engineering to advance practical artificial intelligence.
+Americantriangle is an AI technology company focused on connecting data infrastructure, AI research, and enterprise engineering to advance practical artificial intelligence.
 
 We bring together the capabilities needed to develop, improve, evaluate, and deploy AI systems — combining technical expertise, human feedback, and innovative engineering.
 
