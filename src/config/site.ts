@@ -1,9 +1,13 @@
+import { brandLine, brandSupport } from "@/config/brand";
+
+/** Public sign-in, registration, and the header Get started control. Turn back on when account entry should show. */
+export const showAccountEntry = false;
+
 export const site = {
   name: "Americantriangle",
   title: "Americantriangle",
-  description:
-    "Americantriangle prepares reviewed data, evaluates model outputs, and delivers enterprise applications as projects. Use one division or combine them.",
-  positioning: "Building Reliable AI. Powered by Human Expertise.",
+  description: `${brandSupport} Americantriangle prepares reviewed data, evaluates model outputs, and delivers enterprise applications as projects.`,
+  positioning: brandLine,
 } as const;
 
 export function appUrl(): string {
@@ -31,6 +35,7 @@ export const publicRoutes = [
   "/industries/manufacturing",
   "/industries/retail",
   "/about",
+  "/careers",
   "/insights",
   "/insights/search",
   "/insights/category/data-infrastructure",

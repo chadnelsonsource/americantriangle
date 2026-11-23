@@ -13,7 +13,7 @@ export default function IntelligencePage() {
     <DivisionOverview
       eyebrow="The intelligence"
       title="Advancing the intelligence behind AI systems."
-      lede="This division is for judging a model and, when an engagement is scoped, for training, research, or a safety review. Evaluation is a current service. The public platform does not run a foundation-model training job. A customer can start here without a data project or an application project."
+      lede="This division is for judging a model and, when an engagement is scoped, for training, research, or a safety review. Talent is the person who scores the work. Technology is the evaluation, or a training engagement when one is scoped. The opportunity is the question the client needs answered. Evaluation is a current service. The public platform does not run a foundation-model training job. A customer can start here without a data project or an application project."
       crumbs={[
         { href: "/", label: "Home" },
         { label: "Model intelligence" },

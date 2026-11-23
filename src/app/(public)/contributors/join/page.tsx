@@ -1,18 +1,18 @@
-import { ButtonLink } from "@/components/ui/button";
-import { CtaBand, PageHero, ProcessRow, Section } from "@/components/marketing/sections";
+import { ExpertApplicationForm } from "@/features/leads/expert-form";
+import { PageHero, ProcessRow, Section } from "@/components/marketing/sections";
 import { pageMetadata } from "@/config/seo";
 
 export const metadata = pageMetadata(
   "Become a contributor",
-  "Apply, complete a profile, and pass an assessment. Registration does not guarantee work.",
+  "Submit an expert application without an account. The inquiry is sent by email and saved when the store is available. It does not assign work.",
   "/contributors/join",
 );
 
 const steps = [
-  ["01", "Account", "Create a contributor account and verify the email address."],
-  ["02", "Profile", "Record skills, languages, and availability. Gaps stay visible."],
-  ["03", "Assessment", "Pass the assessment a project requires before paid tasks are assigned."],
-  ["04", "Assignment", "Talent operations decide qualification. An account is not a promise of work."],
+  ["01", "Apply", "Send your name, email, and the work you can do. No account is created."],
+  ["02", "Review", "The application is sent by email and saved for the internal queue when the store is available. It is not an assignment."],
+  ["03", "Assessment", "A project can still require an assessment before paid tasks."],
+  ["04", "Assignment", "Talent operations decide. An application is not a promise of work."],
 ] as const;
 
 export default function JoinPage() {
@@ -20,28 +20,19 @@ export default function JoinPage() {
     <>
       <PageHero
         eyebrow="Contributors"
-        title="Qualification comes before assignment."
-        lede="Expertise areas include software, mathematics, science, writing, finance, business, legal, and healthcare and life sciences. Each project can require its own assessment."
+        title="Apply without an account."
+        lede="Expertise areas include software, mathematics, science, writing, finance, business, legal, and healthcare and life sciences. Submitting this form does not sign you in and does not assign paid work."
         crumbs={[
           { href: "/", label: "Home" },
           { label: "Contributors" },
         ]}
-        actions={
-          <ButtonLink href="/register" variant="accent">
-            Create a contributor account
-          </ButtonLink>
-        }
       />
       <Section eyebrow="Path" title="Four steps. None of them is a job offer.">
         <ProcessRow steps={steps} />
       </Section>
-      <CtaBand
-        eyebrow="Registration"
-        title="Create the account, then complete the profile."
-        body="Staff cannot be created from the public form. Registration does not assign paid work."
-        href="/register"
-        label="Create a contributor account"
-      />
+      <Section eyebrow="Application" title="Send the application." className="pt-0">
+        <ExpertApplicationForm />
+      </Section>
     </>
   );
 }

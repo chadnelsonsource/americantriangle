@@ -13,23 +13,28 @@ export type LeadFormState = {
 
 const attempts = new Map<string, number[]>();
 
+function text(formData: FormData, key: string): string {
+  const value = formData.get(key);
+  return typeof value === "string" ? value : "";
+}
+
 export async function submitLead(_previous: LeadFormState, formData: FormData): Promise<LeadFormState> {
   const reviewed = reviewLead({
-    inquiryType: formData.get("inquiryType"),
-    name: formData.get("name"),
-    email: formData.get("email"),
-    organization: formData.get("organization"),
-    jobTitle: String(formData.get("jobTitle") ?? ""),
-    industry: formData.get("industry"),
-    message: formData.get("message"),
-    timeline: String(formData.get("timeline") ?? ""),
-    scope: String(formData.get("scope") ?? ""),
-    details: String(formData.get("details") ?? ""),
-    website: String(formData.get("website") ?? ""),
-    partnershipCategory: String(formData.get("partnershipCategory") ?? ""),
-    capabilities: String(formData.get("capabilities") ?? ""),
+    inquiryType: text(formData, "inquiryType"),
+    name: text(formData, "name"),
+    email: text(formData, "email"),
+    organization: text(formData, "organization"),
+    jobTitle: text(formData, "jobTitle"),
+    industry: text(formData, "industry"),
+    message: text(formData, "message"),
+    timeline: text(formData, "timeline"),
+    scope: text(formData, "scope"),
+    details: text(formData, "details"),
+    website: text(formData, "website"),
+    partnershipCategory: text(formData, "partnershipCategory"),
+    capabilities: text(formData, "capabilities"),
     consent: formData.get("consent") === "true",
-    companyWebsite: String(formData.get("companyWebsite") ?? ""),
+    companyWebsite: text(formData, "companyWebsite"),
   });
 
   if (!reviewed.ok) return { status: "invalid", message: "Some fields need a correction. The note under each field says what to change.", fieldErrors: reviewed.fieldErrors };
@@ -44,21 +49,27 @@ export async function submitLead(_previous: LeadFormState, formData: FormData): 
 
   const route = routeLead(reviewed.lead.inquiryType);
   const saved = await insertLead(reviewed.lead, route);
-  if (!saved.ok && saved.error === "data_store_unconfigured") {
-    return { status: "error", message: "The inquiry store is not configured, so this message was not saved." };
-  }
-  if (!saved.ok) return leadResult({ stored: false, emailSent: false, reference: saved.errorId });
-  attempts.set(email, [...prior, now].slice(-5));
-
+  const stored = saved.ok;
   const partnership = reviewed.lead.inquiryType === "partnerships";
+  const expert = reviewed.lead.inquiryType === "expert";
+  const confirmation = stored
+    ? partnership
+      ? "We received your partnership proposal and stored it for review. This message is not a partnership agreement, a contract, or an endorsement."
+      : expert
+        ? "We received your expert application and stored it for review. No account was created. This message is not an assignment or a job offer."
+        : "We received your inquiry and stored it for review. No account was created. This message is not a contract or a quote."
+    : partnership
+      ? "We received your partnership proposal by email. It was not saved in the inquiry store. This message is not a partnership agreement, a contract, or an endorsement."
+      : expert
+        ? "We received your expert application by email. It was not saved in the inquiry store. No account was created. This message is not an assignment or a job offer."
+        : "We received your inquiry by email. It was not saved in the inquiry store. No account was created. This message is not a contract or a quote.";
   const emailResult = await sendTransactionalEmail({
     to: reviewed.lead.email,
     subject: "Americantriangle received your inquiry",
-    text: partnership
-      ? "We received your partnership proposal and stored it for review. This message is not a partnership agreement, a contract, or an endorsement."
-      : "We received your inquiry and stored it for review. This message is not a contract or a quote.",
+    text: confirmation,
   });
   const notify = process.env.LEAD_NOTIFY_EMAIL;
+  let teamNotified = false;
   if (notify) {
     const industry = (INDUSTRIES as readonly string[]).includes(reviewed.lead.industry)
       ? INDUSTRY_LABELS[reviewed.lead.industry as Industry]
@@ -66,16 +77,16 @@ export async function submitLead(_previous: LeadFormState, formData: FormData): 
     const category = (Object.keys(PARTNERSHIP_LABELS) as PartnershipCategory[]).includes(reviewed.lead.partnershipCategory as PartnershipCategory)
       ? PARTNERSHIP_LABELS[reviewed.lead.partnershipCategory as PartnershipCategory]
       : "Not provided";
-    await sendTransactionalEmail({
+    const teamResult = await sendTransactionalEmail({
       to: notify,
       subject: `Inquiry: ${INQUIRY_LABELS[reviewed.lead.inquiryType]}`,
       text: [
-        "A new inquiry was stored.",
+        stored ? "A new inquiry was stored." : "A new inquiry was sent by email. It was not saved in the inquiry store.",
         `Area: ${INQUIRY_LABELS[reviewed.lead.inquiryType]}`,
         `Route: ${route}`,
         `Name: ${reviewed.lead.name}`,
         `Email: ${reviewed.lead.email}`,
-        `Organization: ${reviewed.lead.organization}`,
+        `Organization: ${reviewed.lead.organization || "Not provided"}`,
         `Title: ${reviewed.lead.jobTitle || "Not provided"}`,
         `Industry: ${industry}`,
         `Website: ${reviewed.lead.website || "Not provided"}`,
@@ -90,6 +101,26 @@ export async function submitLead(_previous: LeadFormState, formData: FormData): 
         reviewed.lead.details || "No additional information.",
       ].join("\n"),
     });
+    teamNotified = teamResult.ok;
+  }
+  if (!stored && !emailResult.ok && !teamNotified) {
+    if (emailResult.error === "email_not_configured") {
+      return { status: "error", message: "Email delivery is not configured, and the inquiry was not saved." };
+    }
+    return leadResult({
+      stored: false,
+      emailSent: false,
+      reference: (!saved.ok ? saved.errorId : undefined) ?? (!emailResult.ok ? emailResult.errorId : undefined),
+    });
+  }
+  attempts.set(email, [...prior, now].slice(-5));
+  if (!stored) {
+    return {
+      status: "received",
+      message: emailResult.ok
+        ? "Your inquiry was sent by email. It was not saved in the inquiry store. No account was created."
+        : "Your inquiry was sent to the team by email. A confirmation could not be sent to you. It was not saved in the inquiry store. No account was created.",
+    };
   }
   return leadResult({ stored: true, emailSent: emailResult.ok, reference: emailResult.ok ? undefined : emailResult.errorId });
 }

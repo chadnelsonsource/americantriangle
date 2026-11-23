@@ -1,28 +1,22 @@
 # Americantriangle
 
-**Building Intelligence. Engineering Possibility.**
+**Talent. Technology. Opportunity.**
 
-Americantriangle is an AI technology company with three complementary divisions. A customer can use one division or combine them.
+Connecting human expertise, applied technology, and a requirement that can be scoped.
+
+Talent, Technology, and Opportunity are how the company thinks. The three divisions are what it delivers. A customer can use one division or combine them.
 
 ### 1. AI Data Infrastructure
-- Data collection and annotation
-- Human feedback and preference data
-- Training-data preparation
-- Curation and quality review
+
+The foundation. Collection, annotation, human feedback, and training-data preparation. The work product is reviewed data, not a trained model.
 
 ### 2. AI Model Training, Research & Evaluation
-- Model testing and evaluation
-- Training and fine-tuning, scoped as an engagement
-- Research and benchmarking
-- Safety, alignment, and red-team review
+
+The intelligence. Model evaluation is a current service. Training, research, benchmarking, and safety review are scoped engagements, not a foundation-model training platform.
 
 ### 3. Enterprise AI Applications
-- AI agents and automation
-- Custom AI applications
-- Enterprise integrations
-- Deployment and operations
 
-The public site describes these divisions. Model evaluation is a current service. Training, research, and red-team work are scoped engagements, not a foundation-model training platform.
+The implementation. Agents, custom applications, integrations, and operations, delivered as projects with milestones and client approval.
 
 **Project status:** Application foundation is in the repository. Production launch is not complete. See `docs/DEVELOPMENT_STATUS.md`.
 

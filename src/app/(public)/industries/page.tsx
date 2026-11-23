@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { IndustryCard } from "@/components/marketing/cards";
 import { IndustryIcon } from "@/components/marketing/industry-icon";
-import { EditorialFigure } from "@/components/marketing/figure";
 import { CtaBand, PageHero, Section } from "@/components/marketing/sections";
 import { ButtonLink } from "@/components/ui/button";
 import { pillars } from "@/config/catalog";
@@ -36,13 +35,6 @@ export default function IndustriesPage() {
           </>
         }
       />
-      <Section className="pb-0">
-        <EditorialFigure
-          src="/images/editorial/laboratory.jpg"
-          alt="Scientists working together at a laboratory bench."
-          caption="Scientists at a laboratory bench. This is not an Americantriangle facility and not a client site. Photograph by Yakuzakorat, licensed CC BY 4.0."
-        />
-      </Section>
       <Section id="industry-overview" eyebrow="Six industries" title="Choose the domain. Then choose the work.">
         <ul className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {industries.map((industry) => (

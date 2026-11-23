@@ -1,40 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #f4f1ea;
-  --ink: #17232b;
-  --copper: #8d4f32;
-  --pine: #1e4642;
-  --line: #ddd6c8;
-  --control: #847e74;
-  --danger: #8c2f2f;
-  --muted: #4e5852;
-  --night: #111216;
-  --accent: #ee5a24;
-  --accent-press: #d85722;
-  --accent-ink: #111216;
-  --band: #f6f3ec;
-  --canvas: #f6f3ec;
-  --card: #fffcf8;
+  --paper: #f3f6fb;
+  --ink: #0c1730;
+  --copper: #5b4cdb;
+  --pine: #1d4ed8;
+  --line: #d5e1ef;
+  --control: #8aa0b8;
+  --danger: #9f2d3a;
+  --muted: #3e516b;
+  --night: #07111f;
+  --accent: #0891b2;
+  --accent-press: #0e7490;
+  --accent-ink: #07111f;
+  --band: #f7fbff;
+  --canvas: #f7fafc;
+  --card: #ffffff;
   --font-weight-heading: 520;
   --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
   color-scheme: light;
 }
 
 .dark {
-  --paper: #121614;
-  --canvas: #141614;
-  --card: #1c201e;
-  --ink: #f3efe6;
-  --copper: #e0b08a;
-  --pine: #8fbfb6;
-  --line: #2a3330;
-  --control: #6f7874;
-  --danger: #f0b4b4;
-  --muted: #b7c0b8;
-  --night: #0c0d10;
-  --accent: #ff6a33;
-  --accent-press: #e85d2c;
+  --paper: #070d18;
+  --canvas: #08101c;
+  --card: #101a2e;
+  --ink: #f4f8ff;
+  --copper: #b7a6ff;
+  --pine: #7cb7ff;
+  --line: #24344d;
+  --control: #6d82a0;
+  --danger: #f0b4c0;
+  --muted: #a9b8cc;
+  --night: #050a14;
+  --accent: #22d3ee;
+  --accent-press: #06b6d4;
   color-scheme: dark;
 }
 
@@ -62,7 +62,7 @@
 
 * {
   box-sizing: border-box;
-  --shadow-raise: 0 1px 2px rgb(17 18 22 / 0.04), 0 10px 28px rgb(17 18 22 / 0.05);
+  --shadow-raise: 0 1px 0 rgb(255 255 255 / 0.08) inset, 0 12px 32px rgb(7 17 31 / 0.08);
   --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
   --default-transition-duration: 180ms;
   --default-transition-timing-function: var(--ease-brand);
@@ -93,7 +93,7 @@ body {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--copper) 28%, transparent);
+  background: color-mix(in srgb, var(--accent) 32%, transparent);
 }
 
 :focus {
@@ -102,12 +102,23 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--copper);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
 :is(.bg-night, dialog.sheet) :focus-visible {
   outline-color: var(--band);
+}
+
+.site-header {
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+  background: color-mix(in srgb, var(--card) 86%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.dark .site-header {
+  border-bottom-color: color-mix(in srgb, var(--line) 75%, transparent);
+  background: color-mix(in srgb, var(--canvas) 84%, transparent);
 }
 
 .skip-link {
@@ -170,14 +181,35 @@ body {
   }
 
   .surface {
-    border: 1px solid var(--line);
-    border-radius: 0.5rem;
-    background: var(--card);
-    box-shadow: var(--shadow-raise);
+    border: 1px solid color-mix(in srgb, var(--line) 88%, white);
+    border-radius: 1rem;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, white 46%, transparent), color-mix(in srgb, white 6%, transparent) 42%),
+      color-mix(in srgb, var(--card) 92%, transparent);
+    box-shadow: 0 1px 2px rgb(7 17 31 / 0.04), 0 10px 28px rgb(7 17 31 / 0.05);
+    backdrop-filter: blur(14px);
     transition:
       border-color 180ms var(--ease-brand),
       background-color 180ms var(--ease-brand),
       box-shadow 180ms var(--ease-brand);
+  }
+
+  .surface:hover {
+    border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+    box-shadow: 0 1px 2px rgb(7 17 31 / 0.04), 0 16px 36px rgb(7 17 31 / 0.08);
+  }
+
+  .dark .surface {
+    border-color: color-mix(in srgb, var(--line) 80%, white);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, white 9%, transparent), transparent 46%),
+      color-mix(in srgb, var(--card) 84%, transparent);
+  }
+
+  .hero-wash {
+    background:
+      radial-gradient(ellipse 70% 58% at 50% 44%, rgb(7 17 31 / 0.62), rgb(7 17 31 / 0.28) 64%, rgb(7 17 31 / 0.12)),
+      linear-gradient(180deg, rgb(7 17 31 / 0.28), transparent 36%, rgb(7 17 31 / 0.42));
   }
 
   .disclose {
@@ -214,15 +246,23 @@ dialog.sheet {
   box-shadow: var(--shadow-raise);
 }
 
+dialog.sheet.sheet-day {
+  border-color: var(--line);
+  background: var(--card);
+  color: var(--ink);
+}
+
 dialog.sheet::backdrop {
   background: rgb(17 18 22 / 0.62);
 }
 
-@keyframes rise {
+@keyframes reveal-in {
   from {
-    transform: translateY(0.4rem);
+    opacity: 0;
+    transform: translateY(1rem);
   }
   to {
+    opacity: 1;
     transform: none;
   }
 }
@@ -239,12 +279,19 @@ dialog.sheet::backdrop {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .reveal {
-      animation: rise 420ms var(--ease-brand) both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 14%;
-    }
+  html.reveal-ready .reveal:not(.is-in):not(.is-shown) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  html.reveal-ready .reveal.is-shown {
+    opacity: 1;
+    transform: none;
+  }
+
+  html.reveal-ready .reveal.is-in {
+    animation: reveal-in 560ms var(--ease-brand) both;
+    animation-delay: var(--reveal-delay, 0ms);
   }
 
   .menu-panel {
@@ -289,12 +336,17 @@ dialog.sheet::backdrop {
   .animate-pulse {
     animation: none;
     transform: none;
+    opacity: 1;
   }
 
   .cycle-line,
   .surface,
   .disclose {
     transition: none;
+  }
+
+  .hero-video {
+    display: none;
   }
 }
 

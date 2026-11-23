@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 export function FeatureCard({ title, body }: { title: string; body: string }) {
   return (
-    <article className="surface reveal p-5 transition-colors hover:border-ink">
+    <article className="surface reveal p-5">
       <h3 className="text-lg">{title}</h3>
       <p className="mt-2 text-sm leading-6 text-muted">{body}</p>
     </article>
@@ -32,7 +32,7 @@ export function SolutionCard({
       href={href}
       className={cn(
         "reveal flex min-h-80 flex-col rounded-md p-7 transition-colors md:p-8",
-        dark ? "border border-white/15 bg-night text-band hover:border-band" : "surface text-ink hover:border-ink",
+        dark ? "rounded-2xl border border-white/15 bg-night text-band hover:border-accent" : "surface text-ink",
       )}
     >
       {role ? <p className={cn("eyebrow", dark ? "text-band/75" : "text-muted")}>{role}</p> : null}
@@ -74,7 +74,7 @@ export function IndustryCard({
     <article id={id} className="h-full">
       <Link
         href={href}
-        className="surface reveal flex h-full flex-col p-6 text-ink transition-colors hover:border-ink"
+        className="surface reveal flex h-full flex-col p-6 text-ink"
       >
         {icon}
         <h3 className="mt-5 text-2xl">{title}</h3>
@@ -135,7 +135,7 @@ type VerifiedCase = {
 export function CaseStudyCard(item: Demonstration | VerifiedCase) {
   if (!item.verified) {
     return (
-      <aside className="reveal border-l-2 border-accent bg-card px-5 py-5">
+      <aside className="surface reveal px-5 py-5">
         <p className="eyebrow text-copper">Illustrative scenario</p>
         <h3 className="mt-3 text-xl">{item.title}</h3>
         <div className="mt-3 text-sm leading-6 text-muted">{item.body}</div>

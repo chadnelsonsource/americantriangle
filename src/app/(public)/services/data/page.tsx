@@ -15,7 +15,7 @@ export default function DataServicesPage() {
     <DivisionOverview
       eyebrow="The foundation"
       title="The foundation of reliable artificial intelligence."
-      lede="Reliable systems depend on data a person can explain and another person can review. This division collects, annotates, compares, curates, and prepares that data. Preference data can later support training or RLHF. Preparing it is not a training run."
+      lede="Reliable systems depend on data a person can explain and another person can review. This division collects, annotates, compares, curates, and prepares that data. Talent is the person who prepares or reviews it, technology is the schema and the stored record, and the opportunity is the dataset the client needs. Preference data can later support training or RLHF. Preparing it is not a training run."
       crumbs={[
         { href: "/", label: "Home" },
         { label: "Data infrastructure" },

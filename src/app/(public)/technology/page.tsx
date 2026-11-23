@@ -35,7 +35,7 @@ export default function TechnologyPage() {
             <ButtonLink href="#stack" variant="accent">
               Read the register
             </ButtonLink>
-            <ButtonLink href="/consultation?type=integrated" variant="secondary" tone="night">
+            <ButtonLink href="/consultation?type=integrated" variant="secondary">
               Request a consultation
             </ButtonLink>
           </>

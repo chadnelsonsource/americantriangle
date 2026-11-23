@@ -34,7 +34,17 @@ export default function InsightsPage() {
         </div>
       </Section>
       <Section eyebrow="Featured" title="One article, when one is marked featured.">
-        {featured ? <InsightList items={[featured]} /> : <p className="max-w-2xl text-sm leading-6 text-muted">No article is featured.</p>}
+        {featured ? (
+          <InsightList items={[featured]} />
+        ) : (
+          <p className="max-w-2xl text-sm leading-6 text-muted">
+            No article is featured. Until one is published, the{" "}
+            <Link href="/resources" className="text-ink underline decoration-line underline-offset-4">
+              method notes
+            </Link>{" "}
+            explain how a preference, a review, and a milestone are recorded.
+          </p>
+        )}
       </Section>
       <Section className="pt-0" eyebrow="Latest" title="Published most recently.">
         <InsightList items={latest} />

@@ -34,7 +34,7 @@ export default function SolutionsPage() {
             <ButtonLink href="/consultation?type=integrated" variant="accent">
               Request a consultation
             </ButtonLink>
-            <ButtonLink href="#solutions" variant="secondary" tone="night">
+            <ButtonLink href="#solutions" variant="secondary">
               Review the solutions
             </ButtonLink>
           </>

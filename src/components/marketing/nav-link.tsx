@@ -27,7 +27,7 @@ export function NavLink({
       aria-current={current ? "page" : undefined}
       aria-label={name}
       onClick={onNavigate}
-      className={cn("block min-h-11 rounded-md px-3 py-2 text-sm text-band/80 transition-colors hover:bg-white/5 hover:text-band", current && "text-band")}
+      className={cn("block min-h-11 rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:bg-line/70 hover:text-ink", current && "font-medium text-ink")}
     >
       {item.label}
     </Link>

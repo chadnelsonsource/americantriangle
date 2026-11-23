@@ -233,7 +233,6 @@ export const toolGroups: readonly ToolGroup[] = [
       { name: "React", status: "repository", body: "The interface layer. Business rules stay in domain services." },
       { name: "TypeScript", status: "repository", body: "Strict mode for the application code." },
       { name: "Tailwind CSS", status: "repository", body: "The shared visual tokens. No second design system." },
-      { name: "Three.js", status: "repository", body: "The homepage hero draws three glass towers and animated connections in the browser. It is not a video or a still image." },
     ],
   },
   {

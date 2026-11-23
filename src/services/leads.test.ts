@@ -24,6 +24,7 @@ describe("leads", () => {
     expect(routeLead("model_intelligence")).toBe("delivery");
     expect(routeLead("integrated")).toBe("delivery");
     expect(routeLead("partnerships")).toBe("general");
+    expect(routeLead("expert")).toBe("general");
     expect(routeLead("other")).toBe("general");
   });
 
@@ -102,8 +103,48 @@ describe("leads", () => {
     expect(partnershipCategoryFromQuery("unknown")).toBe("");
   });
 
-  it("confirms only a stored inquiry", () => {
+  it("accepts an expert application without an organization or an account", () => {
+    const result = reviewLead({
+      inquiryType: "expert",
+      name: "Amina Cole",
+      email: "amina@example.com",
+      organization: "",
+      message: "I can score written answers against a rubric the project provides.",
+      capabilities: "Writing, research review, and preference comparisons.",
+      consent: true,
+      companyWebsite: "",
+    });
+    expect(result.ok).toBe(true);
+    if (result.ok && !result.discardAsSpam) {
+      expect(result.lead.organization).toBe("");
+      expect(result.lead.capabilities).toMatch(/Writing/);
+      expect(result.lead.website).toBe("");
+    }
+  });
+
+  it("rejects an expert application that omits the work or the expertise", () => {
+    const result = reviewLead({
+      inquiryType: "expert",
+      name: "Amina Cole",
+      email: "amina@example.com",
+      message: "too short",
+      capabilities: "",
+      consent: false,
+      companyWebsite: "",
+    });
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.fieldErrors.message).toMatch(/20 characters/);
+      expect(result.fieldErrors.capabilities).toMatch(/expertise/i);
+      expect(result.fieldErrors.consent).toMatch(/Consent/);
+    }
+  });
+
+  it("confirms a stored inquiry or an email when the store is unavailable", () => {
     expect(leadResult({ stored: false, emailSent: false }).status).toBe("error");
+    expect(leadResult({ stored: false, emailSent: true }).status).toBe("received");
+    expect(leadResult({ stored: false, emailSent: true }).message).toMatch(/sent by email/);
+    expect(leadResult({ stored: false, emailSent: true }).message).toMatch(/not saved/);
     expect(leadResult({ stored: true, emailSent: false }).message).toMatch(/could not be sent/);
     expect(leadResult({ stored: true, emailSent: true }).message).toMatch(/confirmation email was sent/);
     expect(leadResult({ stored: false, emailSent: false, reference: "11111111-1111-4111-8111-111111111111" }).message).toMatch(/Reference 11111111/);

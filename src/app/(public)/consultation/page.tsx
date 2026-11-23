@@ -1,20 +1,20 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
-import { FaqList } from "@/components/marketing/faq";
-import { PageHero, Section } from "@/components/marketing/sections";
+import { InquiryLayout, PageHero } from "@/components/marketing/sections";
 import { pageMetadata } from "@/config/seo";
 import { LeadForm } from "@/features/leads/lead-form";
 import { interestFromQuery } from "@/services/leads";
 
 export const metadata = pageMetadata(
   "Request a consultation",
-  "Describe a data, evaluation, or application engagement. The inquiry is stored for the internal queue.",
+  "Describe a data, evaluation, or application engagement. The inquiry is sent by email and saved when the store is available.",
   "/consultation",
 );
 
 const questions = [
   {
     question: "Does a consultation start the project?",
-    answer: "No. Discovery, a recommendation, and an estimate are later records. This form only stores the request.",
+    answer: "No. Discovery, a recommendation, and an estimate are later records. This form sends the request by email and saves it when the store is available.",
   },
   {
     question: "Which area should I pick?",
@@ -34,6 +34,7 @@ export default async function ConsultationPage({ searchParams }: { searchParams:
   const params = await searchParams;
   const inquiryType = interestFromQuery(params.type);
   if (inquiryType === "partnerships") redirect("/partners");
+  if (inquiryType === "expert") redirect("/contributors/join");
   return (
     <>
       <PageHero
@@ -45,17 +46,21 @@ export default async function ConsultationPage({ searchParams }: { searchParams:
           { label: "Consultation" },
         ]}
       />
-      <Section>
-        <div className="grid items-start gap-12 lg:grid-cols-2">
-          <div>
-            <h2 className="text-3xl">What this request is</h2>
-            <div className="mt-6">
-              <FaqList items={questions} />
-            </div>
-          </div>
-          <LeadForm key={inquiryType} defaultType={inquiryType} />
-        </div>
-      </Section>
+      <InquiryLayout
+        title="What this request is"
+        intro={
+          <>
+            The area you choose routes the inquiry. A collaboration uses the{" "}
+            <Link href="/partners" className="text-ink underline decoration-line underline-offset-4">
+              partnership form
+            </Link>
+            .
+          </>
+        }
+        notes={questions}
+      >
+        <LeadForm key={inquiryType} defaultType={inquiryType} />
+      </InquiryLayout>
     </>
   );
 }

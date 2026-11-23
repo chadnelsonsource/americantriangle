@@ -8,7 +8,6 @@ The repository uses this stack. Empty credentials do not stop the public site fr
 | Language | TypeScript strict | `tsconfig.json` |
 | Database, auth, files | Supabase (PostgreSQL, Auth, Storage) | `supabase/migrations`, `src/server/db` |
 | UI | Tailwind CSS, shared components in the shadcn pattern | `src/components/ui`, `src/styles` |
-| Homepage scene | Three.js, React Three Fiber, Drei, a desktop bloom pass | `src/components/marketing/hero-scene.tsx` |
 | Validation | Zod | `src/features/*/schema.ts` and services |
 | Background work | Inngest | `src/server/inngest`, `src/app/api/inngest` |
 | Client payments | Stripe | `src/app/api/stripe/webhook` |

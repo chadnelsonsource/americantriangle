@@ -209,19 +209,11 @@ export const engineeringNav = [
   { href: "/services/engineering/agents", label: "Agents and automation", exact: false },
 ] as const;
 
-export const companyNav = [
-  { href: "/platform", label: "Platform", exact: false },
-  { href: "/technology", label: "Technology", exact: true },
+export const headerNav = [
+  { href: "/about", label: "About us", exact: true },
   { href: "/industries", label: "Industries", exact: false },
-  { href: "/solutions", label: "Enterprise solutions", exact: true },
-  { href: "/about", label: "About", exact: true },
-  { href: "/trust", label: "Trust", exact: true },
-  { href: "/quality", label: "Quality", exact: true },
-  { href: "/insights", label: "Insights", exact: false },
-  { href: "/resources", label: "Resources", exact: false },
-  { href: "/contributors/join", label: "Contributors", exact: false },
-  { href: "/partners", label: "Partnerships", exact: true },
-  { href: "/contact", label: "Contact", exact: true },
+  { href: "/careers", label: "Careers", exact: true },
+  { href: "/contact", label: "Contact us", exact: true },
 ] as const;
 
 export const pillars = [

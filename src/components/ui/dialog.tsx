@@ -38,12 +38,12 @@ export function Dialog({
   }, [onClose]);
 
   return (
-    <dialog id={id} ref={ref} aria-labelledby={titleId} className={cn("sheet", className)} onClose={onClose}>
-      <div className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-3">
-        <h2 id={titleId} className="font-sans text-base font-medium text-band">
+    <dialog id={id} ref={ref} aria-labelledby={titleId} className={cn("sheet sheet-day", className)} onClose={onClose}>
+      <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-3">
+        <h2 id={titleId} className="font-sans text-base font-medium text-ink">
           {title}
         </h2>
-        <button type="button" className="min-h-11 rounded-md px-3 text-sm text-band transition-colors hover:bg-white/10" onClick={onClose}>
+        <button type="button" className="min-h-11 rounded-md px-3 text-sm text-ink transition-colors hover:bg-ink/5" onClick={onClose}>
           Close
         </button>
       </div>

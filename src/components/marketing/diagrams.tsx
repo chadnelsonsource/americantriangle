@@ -9,7 +9,7 @@ export function WorkflowDiagram() {
           <g key={label}>
             {index < steps.length - 1 ? <line x1={x + 128} y1={46} x2={x + 168} y2={46} stroke="currentColor" strokeOpacity="0.35" /> : null}
             <rect x={x} y={18} width={128} height={56} fill="none" stroke="currentColor" strokeOpacity="0.45" />
-            <text x={x + 64} y={42} textAnchor="middle" fill="#ee5a24" fontSize="11" fontFamily="Georgia, serif">
+            <text x={x + 64} y={42} textAnchor="middle" fill="var(--accent)" fontSize="11" fontFamily="Georgia, serif">
               0{index + 1}
             </text>
             <text x={x + 64} y={60} textAnchor="middle" fill="currentColor" fontSize="13" fontFamily="Outfit, Segoe UI, sans-serif">

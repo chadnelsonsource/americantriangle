@@ -80,7 +80,7 @@ export function InquiryQueue({ leads }: { leads: readonly InquiryRow[] }) {
             {shown.map((lead) => (
               <li key={lead.id} className="surface space-y-2 p-4 text-sm">
                 <p className="text-muted">{lead.createdAt.slice(0, 10)}</p>
-                <p className="font-medium">{lead.organization}</p>
+                <p className="font-medium">{lead.organization || lead.name}</p>
                 <p>{typeLine(lead)}</p>
                 <p>
                   {lead.name}
@@ -110,7 +110,7 @@ export function InquiryQueue({ leads }: { leads: readonly InquiryRow[] }) {
                 {shown.map((lead) => (
                   <tr key={lead.id}>
                     <Td>{lead.createdAt.slice(0, 10)}</Td>
-                    <Td>{lead.organization}</Td>
+                    <Td>{lead.organization || lead.name}</Td>
                     <Td>{typeLine(lead)}</Td>
                     <Td>
                       {lead.name}

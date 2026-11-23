@@ -1,13 +1,14 @@
 import Link from "next/link";
+import { Logo } from "@/components/brand/logo";
 import { FeatureCard } from "@/components/marketing/cards";
-import { EditorialFigure } from "@/components/marketing/figure";
 import { CtaBand, PageHero, ProcessRow, Section, SplitPanel } from "@/components/marketing/sections";
 import { publishedTestimonials, TestimonialList } from "@/components/marketing/testimonial";
+import { brandPhilosophy, brandSupport, principles } from "@/config/brand";
 import { pageMetadata } from "@/config/seo";
 
 export const metadata = pageMetadata(
   "About",
-  "Americantriangle connects high-quality data, AI research, and practical engineering. The mission, vision, and three divisions describe that work. A customer can use one division or combine them.",
+  "The Americantriangle triangle names Talent, Technology, and Opportunity. The three divisions are the work those principles become. A customer can use one division or combine them.",
   "/about",
 );
 
@@ -53,8 +54,8 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About"
-        title="Data, research, and engineering for better AI systems."
-        lede="Americantriangle is an AI technology company focused on connecting high-quality data, advanced AI research, and practical engineering to help organizations develop and deploy better AI systems. A customer can use one division or combine them."
+        title="Two readings of one triangle."
+        lede={`${brandSupport} Talent, Technology, and Opportunity are the principles. The three divisions are the work. A customer can use one division or combine them.`}
         crumbs={[
           { href: "/", label: "Home" },
           { label: "About" },
@@ -65,15 +66,27 @@ export default function AboutPage() {
           <article className="surface p-6 md:p-8">
             <h3 className="eyebrow text-muted">Mission</h3>
             <p className="mt-4 font-serif text-2xl leading-snug text-ink">
-              To advance artificial intelligence through high-quality data, intelligent research, and innovative engineering.
+              To connect human expertise, applied technology, and a real requirement, so an organization can prepare reviewed data, evaluate a model, or ship an agreed system.
             </p>
           </article>
           <article className="surface p-6 md:p-8">
             <h3 className="eyebrow text-muted">Vision</h3>
             <p className="mt-4 font-serif text-2xl leading-snug text-ink">
-              To build an integrated AI ecosystem connecting human expertise, advanced intelligence, and real-world applications.
+              An integrated company in which human expertise, applied technology, and real requirements stay connected across the three divisions.
             </p>
           </article>
+        </div>
+      </Section>
+      <Section eyebrow="The mark" title="Talent, technology, and opportunity." lede={brandPhilosophy}>
+        <div className="grid justify-items-center gap-10">
+          <Logo imageClassName="h-36 w-auto sm:h-44" />
+          <ul className="grid w-full gap-4 md:grid-cols-3">
+            {principles.map((item) => (
+              <li key={item.title}>
+                <FeatureCard title={item.title} body={item.body} />
+              </li>
+            ))}
+          </ul>
         </div>
       </Section>
       <SplitPanel
@@ -109,7 +122,7 @@ export default function AboutPage() {
         <p>Data work can support a model engagement. A model engagement can stand on data the client already has. An application can be built on a model the client already runs.</p>
         <p>Data infrastructure produces reviewed data. It does not train a model. Training, when it is in scope, is a named project under the intelligence division. The public platform does not run a foundation-model training job.</p>
       </SplitPanel>
-      <Section eyebrow="Our approach" title="More than a powerful model." lede="Meaningful progress in artificial intelligence requires more than powerful models. It requires reliable data, rigorous research, continuous evaluation, and effective real-world implementation." className="pt-0">
+      <Section eyebrow="Our approach" title="What the principles become in practice." lede="Each principle shows up in a record the company can keep. None of these cards is a completed customer result." className="pt-0">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {approach.map((item) => (
             <FeatureCard key={item.title} title={item.title} body={item.body} />
@@ -125,13 +138,6 @@ export default function AboutPage() {
         <p className="mt-8 max-w-3xl text-sm leading-7 text-muted">
           An organization can start with the question it already has. The divisions can operate on their own, or the work can move between them when that is useful. Collaboration is a choice, not a required path.
         </p>
-      </Section>
-      <Section className="pb-0">
-        <EditorialFigure
-          src="/images/editorial/research.jpg"
-          alt="A scientist looking through a microscope in a laboratory."
-          caption="A scientist using a microscope during a health-research project. This is not an Americantriangle team or facility. Photograph by Mark Fergus, CSIRO, licensed CC BY 3.0."
-        />
       </Section>
       <Section eyebrow="How work is judged" title="Review is a step, not a tagline.">
         <ProcessRow steps={review} />

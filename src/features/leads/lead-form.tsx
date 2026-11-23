@@ -7,11 +7,12 @@ import { CheckField, SelectField, TextArea, TextField } from "@/components/ui/fi
 import { Alert } from "@/components/ui/feedback";
 import { submitLead, type LeadFormState } from "@/features/leads/actions";
 import { useFormFocus } from "@/components/ui/use-form-focus";
+import { cn } from "@/lib/utils";
 import { INDUSTRY_LABELS, INDUSTRIES, INQUIRY_LABELS, PROJECT_INQUIRY_TYPES, type ProjectInquiryType } from "@/services/leads";
 
 const initial: LeadFormState = { status: "idle" };
 
-export function LeadForm({ defaultType = "other" }: { defaultType?: ProjectInquiryType }) {
+export function LeadForm({ defaultType = "other", className }: { defaultType?: ProjectInquiryType; className?: string }) {
   const [state, action, pending] = useActionState(submitLead, initial);
   const ref = useFormFocus(state);
   const [draft, setDraft] = useState({
@@ -29,7 +30,7 @@ export function LeadForm({ defaultType = "other" }: { defaultType?: ProjectInqui
   });
 
   return (
-    <form ref={ref} action={action} className="grid max-w-3xl gap-10" noValidate>
+    <form ref={ref} action={action} className={cn("grid gap-8", className)} noValidate>
       {state.status === "received" ? <Alert tone="success">{state.message}</Alert> : null}
       {state.status === "error" || state.status === "invalid" ? <Alert tone="danger">{state.message}</Alert> : null}
 
@@ -155,7 +156,7 @@ export function LeadForm({ defaultType = "other" }: { defaultType?: ProjectInqui
           error={state.fieldErrors?.consent}
         />
         <p className="text-sm leading-6 text-muted">
-          The form stores your name, email, company, title if you add one, industry, area of interest, description, and any timeline, scope, or notes. It does not create a contract. The{" "}
+          No account or sign-in is required. Your name, email, company, title if you add one, industry, area of interest, description, and any timeline, scope, or notes are sent by email. They are saved when the inquiry store is available. This does not create a contract. The{" "}
           <Link href="/privacy" className="text-ink underline decoration-line underline-offset-4">privacy page</Link> and{" "}
           <Link href="/terms" className="text-ink underline decoration-line underline-offset-4">terms page</Link> describe the product. Counsel has not issued binding text.
         </p>
@@ -163,7 +164,7 @@ export function LeadForm({ defaultType = "other" }: { defaultType?: ProjectInqui
           <label htmlFor="companyWebsite">Website</label>
           <input id="companyWebsite" name="companyWebsite" tabIndex={-1} autoComplete="off" />
         </div>
-        <Button type="submit" disabled={pending} aria-busy={pending}>
+        <Button type="submit" className="w-full sm:w-fit" disabled={pending} aria-busy={pending}>
           {pending ? "Sending" : "Submit inquiry"}
         </Button>
       </div>

@@ -42,7 +42,7 @@ const value = [
 ] as const;
 
 const approach = [
-  ["01", "Proposal", "The form stores the category, the collaboration, the capabilities, and any website or notes you add."],
+  ["01", "Proposal", "The form sends the category, the collaboration, the capabilities, and any website or notes by email, and saves them when the store is available."],
   ["02", "Review", "Project managers and administrators can read a stored proposal. It is not published and it is not sent to a model provider."],
   ["03", "Conversation", "If the proposal fits current work, the team can reply. A reply is a conversation, not an agreement."],
   ["04", "Agreement", "Any collaboration is written separately. This page does not set terms, a share of work, or a public announcement."],
@@ -100,7 +100,7 @@ export default async function PartnersPage({ searchParams }: { searchParams: Pro
 
       <Section id="propose" className="scroll-mt-24 pt-0" eyebrow="Inquiry" title="Describe the collaboration.">
         <p className="max-w-2xl text-sm leading-6 text-muted">
-          A project inquiry still uses the <a href="/contact" className="text-ink underline decoration-line underline-offset-4">contact form</a>. Use this form for a partnership proposal. Nothing is stored until the submission succeeds.
+          A project inquiry still uses the <a href="/contact" className="text-ink underline decoration-line underline-offset-4">contact form</a>. Use this form for a partnership proposal. It is sent by email and saved when the store is available.
         </p>
         <div className="mt-10">
           <PartnershipForm key={category || "none"} defaultCategory={category} />

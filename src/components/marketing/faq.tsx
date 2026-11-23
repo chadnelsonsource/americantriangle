@@ -1,13 +1,42 @@
 "use client";
 
 import { useId, useState } from "react";
+import { TextField } from "@/components/ui/fields";
 
-export function FaqList({ items }: { items: readonly { question: string; answer: string }[] }) {
+export function FaqList({
+  items,
+  searchable = false,
+}: {
+  items: readonly { question: string; answer: string }[];
+  searchable?: boolean;
+}) {
+  const [query, setQuery] = useState("");
   const [open, setOpen] = useState(0);
   const baseId = useId();
+  const needle = searchable ? query.trim().toLowerCase() : "";
+  const visible = needle
+    ? items.filter((item) => `${item.question} ${item.answer}`.toLowerCase().includes(needle))
+    : items;
   return (
-    <div className="border-t border-line">
-      {items.map((item, index) => {
+    <div>
+      {searchable ? (
+        <div className="mb-6 max-w-md">
+          <TextField
+            label="Search questions"
+            name={`${baseId.replace(/:/g, "")}-search`}
+            type="search"
+            value={query}
+            onChange={(event) => {
+              setQuery(event.target.value);
+              setOpen(0);
+            }}
+            placeholder="Search questions"
+          />
+        </div>
+      ) : null}
+      {visible.length === 0 ? <p className="text-sm leading-6 text-muted">No questions match that search.</p> : null}
+      <div className="border-t border-line">
+      {visible.map((item, index) => {
         const expanded = open === index;
         const panelId = `${baseId}-${index}`;
         return (
@@ -33,9 +62,10 @@ export function FaqList({ items }: { items: readonly { question: string; answer:
                 </p>
               </div>
             </div>
-          </div>
-        );
-      })}
+        </div>
+      );
+    })}
+      </div>
     </div>
   );
 }

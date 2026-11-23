@@ -40,12 +40,12 @@ export function PageHero({
   crumbs?: readonly { href?: string; label: string }[];
 }) {
   return (
-    <section className="bg-night text-band">
-      <div className="page py-16 md:py-24">
+    <section className="border-b border-line bg-canvas text-ink">
+      <div className="page py-16 md:py-20">
         {crumbs ? <Breadcrumbs items={crumbs} /> : null}
-        <p className="eyebrow text-band/75">{eyebrow}</p>
-        <h1 className="heading-display mt-4 text-band">{title}</h1>
-        <p className="measure mt-5 text-base leading-7 text-band/80">{lede}</p>
+        <p className="eyebrow text-accent">{eyebrow}</p>
+        <h1 className="heading-display mt-4">{title}</h1>
+        <p className="measure mt-5 text-base leading-7 text-muted">{lede}</p>
         {actions ? <div className="mt-8 flex flex-wrap gap-3">{actions}</div> : null}
       </div>
     </section>
@@ -90,21 +90,53 @@ function CatalogRow({ item }: { item: CatalogItem }) {
 
 export function CatalogList({ items }: { items: CatalogItem[] }) {
   return (
-    <ul className="border-t border-line">
+    <ul className="divide-y divide-line/80">
       {items.map((item) => (
-        <li key={item.title} className="border-b border-line">
+        <li key={item.title}>
           {item.href ? (
-            <Link href={item.href} className="block py-6 transition-colors hover:bg-card">
+            <Link href={item.href} className="block rounded-2xl px-4 py-6 transition-colors hover:bg-card">
               <CatalogRow item={item} />
             </Link>
           ) : (
-            <div className="py-6">
+            <div className="px-4 py-6">
               <CatalogRow item={item} />
             </div>
           )}
         </li>
       ))}
     </ul>
+  );
+}
+
+export function InquiryLayout({
+  title,
+  intro,
+  notes,
+  children,
+}: {
+  title: string;
+  intro: React.ReactNode;
+  notes: readonly { question: string; answer: string }[];
+  children: React.ReactNode;
+}) {
+  return (
+    <Section>
+      <div className="max-w-2xl">
+        <h2 className="heading-title">{title}</h2>
+        <div className="mt-4 text-sm leading-6 text-muted">{intro}</div>
+      </div>
+      <ul className={cn("mt-8 grid items-stretch gap-4", notes.length > 3 ? "md:grid-cols-2" : "md:grid-cols-3")}>
+        {notes.map((note) => (
+          <li key={note.question} className="rounded-2xl border border-line bg-card p-5">
+            <h3 className="text-lg leading-snug">{note.question}</h3>
+            <p className="mt-3 text-sm leading-6 text-muted">{note.answer}</p>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-6 rounded-2xl border border-line bg-card p-6 md:p-8">
+        {children}
+      </div>
+    </Section>
   );
 }
 
@@ -134,7 +166,7 @@ export function ProcessRow({ steps }: { steps: readonly (readonly [string, strin
   return (
     <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
       {steps.map(([step, title, body]) => (
-        <li key={step}>
+        <li key={step} className="surface p-5">
           <p className="font-serif text-sm text-copper">{step}</p>
           <h3 className="mt-3 text-2xl">{title}</h3>
           <p className="mt-3 text-sm leading-6 text-muted">{body}</p>
@@ -163,7 +195,7 @@ export function CtaBand({
 }) {
   return (
     <section className="page pb-20">
-      <div className="rounded-md bg-night px-7 py-10 text-band md:px-10">
+      <div className="rounded-2xl bg-night px-7 py-10 text-band md:px-10 md:py-12">
         <p className="eyebrow text-band/75">{eyebrow}</p>
         <h2 className="heading-title mt-4 text-band">{title}</h2>
         <p className="measure mt-4 text-sm leading-6 text-band/80">{body}</p>

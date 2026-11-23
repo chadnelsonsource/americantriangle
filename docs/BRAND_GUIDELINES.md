@@ -2,7 +2,7 @@
 
 Americantriangle should look like a serious engineering firm that employs experts, not like a generic AI template.
 
-The mark is a three-sided geometric monogram. It refers to the name. It is not a claim about a legal trademark.
+The mark is a triangle. It has two readings. Talent, Technology, and Opportunity are the principles: how the company thinks. AI Data Infrastructure, AI Model Training, Research & Evaluation, and Enterprise AI Applications are the divisions: what a customer can hire. One principle does not belong to one division. The mark is not a claim about a legal trademark.
 
 ## Personality
 
@@ -14,21 +14,21 @@ Tokens are defined in `src/styles/globals.css`.
 
 | Token | Light | Dark | Use |
 | --- | --- | --- | --- |
-| Paper | `#f4f1ea` | `#121614` | Workspace and fallback background |
-| Canvas | `#f6f3ec` | `#141614` | Public page background |
-| Card | `#fffcf8` | `#1c201e` | Quiet panels on the public site |
-| Ink | `#17232b` | `#f3efe6` | Text and workspace primary buttons |
-| Night | `#111216` | `#0c0d10` | Public header, footer, and editorial bands |
-| Band | `#f6f3ec` | `#f6f3ec` | Text on night bands. It does not flip in dark mode |
-| Accent | `#ee5a24` | `#ff6a33` | Public primary actions and short emphasis |
-| Accent ink | `#111216` | `#111216` | Text on accent buttons |
-| Copper | `#8d4f32` | `#e0b08a` | Focus rings, small labels, and rules |
-| Pine | `#1e4642` | `#8fbfb6` | Secondary emphasis in workspaces |
-| Line | `#ddd6c8` | `#2a3330` | Borders |
-| Muted | `#4e5852` | `#b7c0b8` | Secondary text |
-| Danger | `#8c2f2f` | `#f0b4b4` | Errors |
+| Paper | `#f3f6fb` | `#070d18` | Workspace and fallback background |
+| Canvas | `#f7fafc` | `#08101c` | Public page background |
+| Card | `#ffffff` | `#101a2e` | Glass panels |
+| Ink | `#0c1730` | `#f4f8ff` | Text and workspace primary buttons |
+| Night | `#07111f` | `#050a14` | Public header, footer, and editorial bands |
+| Band | `#f7fbff` | `#f7fbff` | Text on night bands. It does not flip in dark mode |
+| Accent | `#0891b2` | `#22d3ee` | Cyan primary actions and short emphasis |
+| Accent ink | `#07111f` | `#07111f` | Text on accent buttons |
+| Copper | `#5b4cdb` | `#b7a6ff` | Violet labels and small rules |
+| Pine | `#1d4ed8` | `#7cb7ff` | Blue secondary emphasis |
+| Line | `#d5e1ef` | `#24344d` | Thin borders |
+| Muted | `#3e516b` | `#a9b8cc` | Secondary text |
+| Danger | `#9f2d3a` | `#f0b4c0` | Errors |
 
-Public pages use a light canvas with night bands. Night bands set their own light text so a dark theme does not turn that text back to ink. Accent fills a button, not a page section. Accent buttons use accent ink so the label stays readable. Small labels on a light surface use copper. Copper stays the focus ring. Do not fill the page with gradients.
+Public pages use a cool canvas with deep navy bands. Night bands set their own white text so a dark theme does not turn that text back to ink. Accent is cyan and fills a button, not a page section. Accent buttons use accent ink so the label stays readable. Small labels use the violet token. Focus rings use the cyan accent. Soft gradients stay on the homepage hero and as a highlight on glass cards.
 
 ## Type
 
@@ -39,7 +39,7 @@ The scale lives in `src/styles/globals.css`. Display headlines use `.heading-dis
 
 ## Space, edges, and motion
 
-Public sections sit in the `.page` container: 72rem wide, with 1.5rem of side inset. Section padding is 4rem, and 6rem from the `md` breakpoint (48rem) up. Two-column groups start at `sm` (40rem). Side-by-side text and four-column steps wait until `lg` (64rem), so a tablet does not compress a desktop row. Borders are 1px `line`. Cards share `.surface`: card background, 1px line, 0.5rem radius, and `shadow-raise`. The only shadow is that short cool shadow. Corners stay at 0.25rem and 0.5rem.
+Public sections sit in the `.page` container: 72rem wide, with 1.5rem of side inset. Section padding is 4rem, and 6rem from the `md` breakpoint (48rem) up. Two-column groups start at `sm` (40rem). Side-by-side text and four-column steps wait until `lg` (64rem), so a tablet does not compress a desktop row. Borders are 1px. Cards share `.surface`: a thin border, a soft top highlight, and a translucent card fill. Corners stay at 0.25rem and 0.75rem.
 
 Breakpoints stay the Tailwind set: 40rem, 48rem, 64rem, 80rem. Do not add a one-off width in a page.
 
@@ -47,7 +47,7 @@ Motion is 180ms for color, menus, and the mobile dialog, and 420ms for a 0.4rem 
 
 ## Logo
 
-The mark and wordmark are SVG components in `src/components/brand/logo.tsx`, described in [BRAND_ASSETS.md](BRAND_ASSETS.md). Do not redraw them per page. Do not place the mark on a photograph with a glow.
+The logo is `public/images/logo1.png`, rendered by `src/components/brand/logo.tsx` and described in [BRAND_ASSETS.md](BRAND_ASSETS.md). The file includes the triangle and the line “Talent. Technology. Opportunity.” Do not redraw it per page. Do not place the mark on a photograph with a glow. The file is transparent in both themes. Do not put a plate behind it.
 
 ## Imagery
 
@@ -59,7 +59,7 @@ Shared controls live in `src/components/ui`. Marketing layout lives in `src/comp
 
 ## Interface
 
-One button style, one form style, one table style, shared by the marketing site and the workspaces. Corners are slightly rounded. Focus is a visible copper outline. Light and dark follow the CSS variables and the `class` strategy on `html`.
+One button style, one form style, one table style, shared by the marketing site and the workspaces. Corners are slightly rounded. Focus is a visible cyan outline. Light and dark follow the CSS variables and the `class` strategy on `html`.
 
 ## Voice examples
 

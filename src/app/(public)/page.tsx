@@ -1,9 +1,12 @@
 import Link from "next/link";
-import { FeatureCard, SolutionCard } from "@/components/marketing/cards";
-import { HeroVisual } from "@/components/marketing/hero-visual";
+import { BlogCard, FeatureCard, SolutionCard } from "@/components/marketing/cards";
+import { FaqList } from "@/components/marketing/faq";
 import { CapabilityCycle } from "@/components/marketing/capability-cycle";
 import { WorkflowDiagram } from "@/components/marketing/diagrams";
+import { HeroReel } from "@/components/marketing/hero-reel";
 import { ButtonLink } from "@/components/ui/button";
+import { notes, readingMinutes } from "@/content/notes";
+import { brandBridge, brandPhilosophy } from "@/config/brand";
 import { pillars } from "@/config/catalog";
 import { industries } from "@/config/industries";
 import { site } from "@/config/site";
@@ -31,6 +34,25 @@ const stages = [
   ["04", "Delivery", "Approved work, files, and invoices stay inside that client organization."],
 ];
 
+const startingPoints = [
+  {
+    question: "Where should I start?",
+    answer: "Describe the requirement on the consultation form and choose the closest division, or an integrated engagement when more than one record is needed. The form is not a contract, a quote, or a start date.",
+  },
+  {
+    question: "Can the work stay in one division?",
+    answer: "Yes. Reviewed data, an evaluation, and an application project each stand on their own. Combining them is a choice made in the scope, not a path every customer has to follow.",
+  },
+  {
+    question: "Does preparing data train a model?",
+    answer: "No. Annotation, preference rankings, and prepared examples are records a person can review. Evaluation is available now. Training, research, and safety review start only when that engagement is scoped.",
+  },
+  {
+    question: "What happens after I submit?",
+    answer: "The inquiry is sent by email and saved when the store is available. It does not assign a contributor, set a rate, or create the project. A collaboration uses the partnership form. An expert uses the application form.",
+  },
+] as const;
+
 const quality = [
   ["Human experts", "Contributors complete a profile and an assessment before they see paid work."],
   ["Independent review", "The first release uses one review layer: someone other than the author scores the work."],
@@ -44,51 +66,54 @@ export default function HomePage() {
   return (
     <div className="bg-canvas text-ink">
       <OrganizationJsonLd />
-      <section className="bg-night text-band">
-        <div className="page pb-10 pt-16 md:pt-20">
-          <p className="eyebrow text-band/75">Data infrastructure · Model intelligence · Enterprise applications</p>
-          <div className="mt-8 grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8">
-            <div className="min-w-0">
-              <h1 className="heading-display text-band">
-                The human layer behind
-                <span className="mt-1 block font-serif italic text-accent">reliable AI.</span>
-              </h1>
-              <p className="measure mt-6 text-sm leading-6 text-band/80 md:text-base">{site.description}</p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <ButtonLink href="/consultation" variant="accent">
-                  Request a consultation
-                </ButtonLink>
-                <ButtonLink href="/solutions" variant="secondary" tone="night">
-                  Enterprise solutions
-                </ButtonLink>
-              </div>
-              <p className="mt-3">
-                <Link href="/contributors/join" className="inline-flex min-h-11 items-center text-sm text-band/80 underline decoration-white/40 underline-offset-4 hover:text-band hover:decoration-band">
-                  Apply as an expert
-                </Link>
-              </p>
-            </div>
-            <HeroVisual />
+      <section className="relative isolate overflow-hidden bg-[#07111f] text-white">
+        <img
+          src="/images/editorial/hero-engineers.jpg"
+          alt="Engineers reviewing equipment in a server room."
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <HeroReel />
+        <div className="hero-wash absolute inset-0" aria-hidden="true" />
+        <div className="page relative flex min-h-[calc(100svh-4.5rem)] flex-col items-center justify-center pb-12 pt-16 text-center md:pt-20">
+          <p className="eyebrow text-white/75">Talent · Technology · Opportunity</p>
+          <h1 className="heading-display mt-6 text-white">
+            The human layer behind
+            <span className="mt-1 block font-serif italic text-accent">reliable AI.</span>
+          </h1>
+          <p className="measure mt-6 text-sm leading-6 text-white/80 md:text-base">{brandPhilosophy}</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <ButtonLink href="/consultation" variant="accent" className="rounded-full px-6">
+              Request a consultation
+            </ButtonLink>
+            <ButtonLink href="/solutions" variant="secondary" tone="night" className="rounded-full bg-white/15 px-6">
+              Enterprise solutions
+            </ButtonLink>
           </div>
-          <ul className="mt-12 flex flex-wrap gap-x-6 gap-y-1 border-t border-white/10 py-3 text-band/75">
+          <p className="mt-3">
+            <Link href="/contributors/join" className="inline-flex min-h-11 items-center text-sm text-white underline decoration-white/40 underline-offset-4 hover:decoration-white">
+              Apply as an expert
+            </Link>
+          </p>
+          <ul className="mt-14 flex max-w-3xl flex-wrap justify-center gap-x-6 gap-y-1 border-t border-white/25 py-3 text-white/75">
             {capabilities.map(([href, label]) => (
               <li key={href}>
-                <Link href={href} className="eyebrow inline-flex min-h-11 items-center gap-2 hover:text-band">
+                <Link href={href} className="eyebrow inline-flex min-h-11 items-center gap-2 hover:text-white">
                   <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
                   {label}
                 </Link>
               </li>
             ))}
           </ul>
+          <p className="mt-4 max-w-xl text-xs leading-5 text-white/70">
+            Data-center engineers, then an engineering meeting at their computers. These are not Americantriangle teams, facilities, or clients. Videos from Mixkit.
+          </p>
         </div>
       </section>
 
       <section className="page py-16 md:py-24">
         <p className="eyebrow text-muted">Three divisions</p>
         <h2 className="heading-title mt-4">Data, intelligence, and implementation.</h2>
-        <p className="measure mt-5 leading-7 text-muted">
-          Open a division for its catalog. The next section shows when a requirement can use more than one division, and when each record stays separate.
-        </p>
+        <p className="measure mt-5 leading-7 text-muted">{brandBridge} The next section shows when a note can move between them, and when each record stays separate.</p>
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
           {pillars.map((division) => (
             <SolutionCard key={division.href} {...division} />
@@ -101,10 +126,10 @@ export default function HomePage() {
       <section className="page pb-16 md:pb-24">
         <p className="eyebrow text-muted">Services</p>
         <h2 className="heading-title mt-4">Choose the work by its name.</h2>
-        <ul className="mt-10 divide-y divide-line border-y border-line">
+        <ul className="mt-10 divide-y divide-line/80">
           {serviceIndex.map(([href, title, body]) => (
             <li key={href}>
-              <Link href={href} className="grid gap-2 py-5 lg:grid-cols-[16rem_1fr] lg:items-baseline lg:gap-8">
+              <Link href={href} className="grid gap-2 rounded-2xl px-4 py-5 transition-colors hover:bg-card lg:grid-cols-[16rem_1fr] lg:items-baseline lg:gap-8">
                 <h3 className="text-2xl">{title}</h3>
                 <p className="text-sm leading-6 text-muted">{body}</p>
               </Link>
@@ -140,9 +165,9 @@ export default function HomePage() {
         <div className="surface mt-10 hidden px-4 py-6 lg:block">
           <WorkflowDiagram />
         </div>
-        <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {stages.map(([step, title, body]) => (
-            <li key={step}>
+            <li key={step} className="surface p-5">
               <p className="font-serif text-sm text-copper">{step}</p>
               <h3 className="mt-3 text-2xl">{title}</h3>
               <p className="mt-3 text-sm leading-6 text-muted">{body}</p>
@@ -179,24 +204,37 @@ export default function HomePage() {
         </ul>
       </section>
 
-      <section className="page pb-16">
-        <p className="eyebrow text-muted">Writing</p>
-        <h2 className="heading-title mt-4">Insights publish only finished articles.</h2>
+      <section className="page pb-16 md:pb-24">
+        <p className="eyebrow text-muted">Notes</p>
+        <h2 className="heading-title mt-4">Read how a record is kept.</h2>
         <p className="measure mt-5 leading-7 text-muted">
-          The article catalog is empty. Method notes explain how a preference, a review, and a milestone are recorded.
+          These notes explain the work product. They are not customer stories. Signed articles appear on Insights only after one is published.
         </p>
-        <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm leading-6">
-          <Link href="/insights" className="inline-flex min-h-11 items-center text-ink underline decoration-line underline-offset-4 hover:decoration-ink">
-            Insights
-          </Link>
-          <Link href="/resources" className="inline-flex min-h-11 items-center text-ink underline decoration-line underline-offset-4 hover:decoration-ink">
-            Method notes
-          </Link>
-        </p>
+        <ul className="mt-10 grid gap-4">
+          {notes.map((note) => (
+            <li key={note.slug}>
+              <BlogCard
+                href={`/resources/${note.slug}`}
+                category={note.category}
+                meta={`${note.published} · ${readingMinutes(note)} min read`}
+                title={note.title}
+                summary={note.summary}
+              />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="page pb-16 md:pb-24">
+        <p className="eyebrow text-muted">Before you start</p>
+        <h2 className="heading-title mt-4">A few answers before the form.</h2>
+        <div className="mt-8 max-w-3xl">
+          <FaqList items={startingPoints} />
+        </div>
       </section>
 
       <section className="page grid gap-4 pb-16 md:grid-cols-2 md:pb-24">
-        <div className="rounded-md bg-night px-7 py-8 text-band md:px-8 md:py-10">
+        <div className="rounded-2xl border border-white/15 bg-night px-7 py-8 text-band md:px-8 md:py-10">
           <p className="eyebrow text-band/75">For organizations</p>
           <h2 className="mt-4 max-w-md text-3xl text-band">Have a system to evaluate, build, or ship?</h2>
           <p className="measure mt-4 text-sm leading-6 text-band/80">Describe the service. The inquiry is stored for the internal queue. It is not a contract.</p>

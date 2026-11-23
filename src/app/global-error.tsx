@@ -6,7 +6,7 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
   const reference = visibleErrorReference(error.digest);
   return (
     <html lang="en">
-      <body style={{ fontFamily: "Georgia, serif", background: "#f4f1ea", color: "#17232b", padding: "4rem" }}>
+      <body style={{ fontFamily: "Georgia, serif", background: "#07111f", color: "#f7fbff", padding: "4rem" }}>
         <h1>Something went wrong.</h1>
         <p>The page could not be rendered. You can try again.</p>
         {reference ? <p>Reference {reference}</p> : null}

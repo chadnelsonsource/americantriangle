@@ -6,6 +6,7 @@ export const INTERESTS = [
   "enterprise_applications",
   "integrated",
   "partnerships",
+  "expert",
   "other",
 ] as const;
 
@@ -13,7 +14,9 @@ export type InquiryType = (typeof INTERESTS)[number];
 
 export const INQUIRY_TYPES = INTERESTS;
 
-export const PROJECT_INQUIRY_TYPES = INTERESTS.filter((type): type is Exclude<InquiryType, "partnerships"> => type !== "partnerships");
+export const PROJECT_INQUIRY_TYPES = INTERESTS.filter(
+  (type): type is Exclude<InquiryType, "partnerships" | "expert"> => type !== "partnerships" && type !== "expert",
+);
 
 export type ProjectInquiryType = (typeof PROJECT_INQUIRY_TYPES)[number];
 
@@ -23,6 +26,7 @@ export const INQUIRY_LABELS: Record<InquiryType, string> = {
   enterprise_applications: "Enterprise AI Applications",
   integrated: "Integrated AI Solutions",
   partnerships: "Strategic Partnerships",
+  expert: "Expert application",
   other: "Other",
 };
 
@@ -109,11 +113,23 @@ export const leadSchema = z
     if (!z.string().email().safeParse(data.email).success) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["email"], message: "Enter a valid business email." });
     }
-    if (data.organization.trim().length < 2) {
+    if (data.inquiryType !== "expert" && data.organization.trim().length < 2) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["organization"], message: "Enter the company name." });
     }
     if (data.consent !== true) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["consent"], message: "Consent is required before we contact you about this inquiry." });
+    }
+    if (data.inquiryType === "expert") {
+      if (data.organization.trim().length === 1) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["organization"], message: "Enter an organization name, or leave it blank." });
+      }
+      if (data.message.trim().length < 20) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["message"], message: "Describe the work you can do in at least 20 characters." });
+      }
+      if (data.capabilities.trim().length < 20) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["capabilities"], message: "Name your areas of expertise in at least 20 characters." });
+      }
+      return;
     }
     if (data.inquiryType === "partnerships") {
       if (!(PARTNERSHIP_CATEGORIES as readonly string[]).includes(data.partnershipCategory)) {
@@ -162,21 +178,24 @@ export function reviewLead(
     return { ok: false, fieldErrors };
   }
   if (parsed.data.companyWebsite.trim().length > 0) return { ok: true, discardAsSpam: true };
-  const lead =
-    parsed.data.inquiryType === "partnerships"
-      ? parsed.data
-      : { ...parsed.data, website: "", partnershipCategory: "", capabilities: "" };
-  return { ok: true, lead, discardAsSpam: false };
+  if (parsed.data.inquiryType === "expert") {
+    return { ok: true, lead: { ...parsed.data, website: "", partnershipCategory: "" }, discardAsSpam: false };
+  }
+  if (parsed.data.inquiryType === "partnerships") return { ok: true, lead: parsed.data, discardAsSpam: false };
+  return { ok: true, lead: { ...parsed.data, website: "", partnershipCategory: "", capabilities: "" }, discardAsSpam: false };
 }
 
 export function routeLead(inquiryType: InquiryType): "delivery" | "general" {
-  if (inquiryType === "partnerships" || inquiryType === "other") return "general";
+  if (inquiryType === "partnerships" || inquiryType === "expert" || inquiryType === "other") return "general";
   return "delivery";
 }
 
 export function leadResult(input: { stored: boolean; emailSent: boolean; reference?: string }): { status: "received" | "error"; message: string } {
   const reference = input.reference && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(input.reference) ? ` Reference ${input.reference}.` : "";
-  if (!input.stored) return { status: "error", message: `The inquiry could not be saved. Nothing else was changed.${reference}` };
+  if (!input.stored && input.emailSent) {
+    return { status: "received", message: "Your inquiry was sent by email. It was not saved in the inquiry store. No account was created." };
+  }
+  if (!input.stored) return { status: "error", message: `The inquiry could not be saved or sent.${reference}` };
   if (!input.emailSent) return { status: "received", message: `Your inquiry is stored. A confirmation email could not be sent.${reference}` };
   return { status: "received", message: "Your inquiry is stored. A confirmation email was sent. The team will review it." };
 }

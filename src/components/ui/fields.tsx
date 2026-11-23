@@ -27,12 +27,12 @@ export function TextField({
   return (
     <label className="block text-sm" htmlFor={name}>
       <span className="mb-1 block font-medium">{label}</span>
+      <input id={name} name={name} aria-invalid={Boolean(error)} aria-describedby={describedBy(name, hint, error)} className={fieldControl} {...props} />
       {hint ? (
-        <span id={`${name}-hint`} className="mb-2 block text-muted">
+        <span id={`${name}-hint`} className="mt-2 block text-muted">
           {hint}
         </span>
       ) : null}
-      <input id={name} name={name} aria-invalid={Boolean(error)} aria-describedby={describedBy(name, hint, error)} className={fieldControl} {...props} />
       {error ? <FieldError name={name} error={error} /> : null}
     </label>
   );
@@ -48,12 +48,12 @@ export function TextArea({
   return (
     <label className="block text-sm" htmlFor={name}>
       <span className="mb-1 block font-medium">{label}</span>
+      <textarea id={name} name={name} aria-invalid={Boolean(error)} aria-describedby={describedBy(name, hint, error)} className={cn(fieldControl, "min-h-32 py-2")} {...props} />
       {hint ? (
-        <span id={`${name}-hint`} className="mb-2 block text-muted">
+        <span id={`${name}-hint`} className="mt-2 block text-muted">
           {hint}
         </span>
       ) : null}
-      <textarea id={name} name={name} aria-invalid={Boolean(error)} aria-describedby={describedBy(name, hint, error)} className={cn(fieldControl, "min-h-32 py-2")} {...props} />
       {error ? <FieldError name={name} error={error} /> : null}
     </label>
   );
@@ -70,14 +70,14 @@ export function SelectField({
   return (
     <label className="block text-sm" htmlFor={name}>
       <span className="mb-1 block font-medium">{label}</span>
-      {hint ? (
-        <span id={`${name}-hint`} className="mb-2 block text-muted">
-          {hint}
-        </span>
-      ) : null}
       <select id={name} name={name} className={fieldControl} aria-invalid={Boolean(error)} aria-describedby={describedBy(name, hint, error)} {...props}>
         {children}
       </select>
+      {hint ? (
+        <span id={`${name}-hint`} className="mt-2 block text-muted">
+          {hint}
+        </span>
+      ) : null}
       {error ? <FieldError name={name} error={error} /> : null}
     </label>
   );
