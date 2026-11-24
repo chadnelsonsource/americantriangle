@@ -3,20 +3,20 @@ import { InquiryLayout, PageHero } from "@/components/marketing/sections";
 import { pageMetadata } from "@/config/seo";
 import { LeadForm } from "@/features/leads/lead-form";
 
-export const metadata = pageMetadata("Contact", "Describe a project for Americantriangle. The inquiry is sent by email and saved when the store is available. It is not a contract.", "/contact");
+export const metadata = pageMetadata("Contact", "Describe a project for Americantriangle. The inquiry is sent by email. It is not a contract.", "/contact");
 
 const questions = [
   {
     question: "Is sending this form a contract?",
-    answer: "No. The inquiry is sent by email and saved when the store is available. It does not set a rate, a volume of work, or a service level.",
+    answer: "No. The inquiry is sent by email. It does not set a rate, a volume of work, or a service level.",
   },
   {
-    question: "What is stored?",
-    answer: "Name, business email, company, optional title, industry, area of interest, project description, and any timeline, scope, or notes, plus consent to be contacted. The privacy page describes the product. It is not a legal policy.",
+    question: "What is sent?",
+    answer: "Name, business email, company, optional title, industry, area of interest, project description, and any timeline, scope, or notes, plus consent to be contacted. The message is emailed. It is not written to a database in this application.",
   },
   {
     question: "Who can read it?",
-    answer: "The team receives an email copy when notification email is configured. A saved inquiry is readable by project managers and administrators once the database policies are applied. Inquiries are not published, and this form does not send them to a model provider.",
+    answer: "The team receives an email copy when notification email is configured. You receive a short confirmation at the address you entered. The inquiry is not published, and this form does not send it to a model provider.",
   },
 ] as const;
 
@@ -26,7 +26,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Tell us about the work."
-        lede="Describe the requirement and the area it belongs to. The inquiry is sent by email and saved when the store is available. It is not a contract, a quote, or a start date. A partnership proposal uses the partnership form."
+        lede="Describe the requirement and the area it belongs to. The inquiry is sent by email. It is not a contract, a quote, or a start date. A partnership proposal uses the partnership form."
         crumbs={[
           { href: "/", label: "Home" },
           { label: "Contact" },

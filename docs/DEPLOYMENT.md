@@ -14,7 +14,7 @@ This pass does not create the Vercel project, the Supabase projects, the DNS rec
 
 Copy `.env.example`. Leave a value blank to keep that integration off. The service-role key is server-only.
 
-Inquiry email uses Resend only when `RESEND_API_KEY` and `EMAIL_FROM` are both set. A stored inquiry still succeeds when email is off, and the page says the confirmation was not sent. Set `LEAD_NOTIFY_EMAIL` to also send a copy to the team. Do not put a key or an address in source. Apply `supabase/migrations/0003_lead_details.sql` and `supabase/migrations/0004_partnership_inquiries.sql` with the other migrations before expecting the inquiry columns, including partnership fields, to save.
+Inquiry email uses Resend only when `RESEND_API_KEY` and `EMAIL_FROM` are both set. Set `LEAD_NOTIFY_EMAIL` to also send a copy to the team. The from-address must be a verified domain, or Resend's test sender. Do not put a key or an address in source. This application does not store the inquiry in a database.
 
 ## Release sequence
 

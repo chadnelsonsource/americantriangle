@@ -192,10 +192,6 @@ export function routeLead(inquiryType: InquiryType): "delivery" | "general" {
 
 export function leadResult(input: { stored: boolean; emailSent: boolean; reference?: string }): { status: "received" | "error"; message: string } {
   const reference = input.reference && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(input.reference) ? ` Reference ${input.reference}.` : "";
-  if (!input.stored && input.emailSent) {
-    return { status: "received", message: "Your inquiry was sent by email. It was not saved in the inquiry store. No account was created." };
-  }
-  if (!input.stored) return { status: "error", message: `The inquiry could not be saved or sent.${reference}` };
-  if (!input.emailSent) return { status: "received", message: `Your inquiry is stored. A confirmation email could not be sent.${reference}` };
-  return { status: "received", message: "Your inquiry is stored. A confirmation email was sent. The team will review it." };
+  if (!input.emailSent) return { status: "error", message: `The inquiry could not be sent.${reference}` };
+  return { status: "received", message: "Your inquiry was sent by email. No account was created." };
 }

@@ -6,7 +6,7 @@ The repository uses this stack. Empty credentials do not stop the public site fr
 | --- | --- | --- |
 | Application | Next.js App Router, React | `src/app` |
 | Language | TypeScript strict | `tsconfig.json` |
-| Database, auth, files | Supabase (PostgreSQL, Auth, Storage) | `supabase/migrations`, `src/server/db` |
+| Inquiries | Resend email | `src/features/leads`, `src/server/email` |
 | UI | Tailwind CSS, shared components in the shadcn pattern | `src/components/ui`, `src/styles` |
 | Validation | Zod | `src/features/*/schema.ts` and services |
 | Background work | Inngest | `src/server/inngest`, `src/app/api/inngest` |

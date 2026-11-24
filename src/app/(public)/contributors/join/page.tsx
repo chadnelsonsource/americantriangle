@@ -4,13 +4,13 @@ import { pageMetadata } from "@/config/seo";
 
 export const metadata = pageMetadata(
   "Become a contributor",
-  "Submit an expert application without an account. The inquiry is sent by email and saved when the store is available. It does not assign work.",
+  "Submit an expert application without an account. The inquiry is sent by email. It does not assign work.",
   "/contributors/join",
 );
 
 const steps = [
   ["01", "Apply", "Send your name, email, and the work you can do. No account is created."],
-  ["02", "Review", "The application is sent by email and saved for the internal queue when the store is available. It is not an assignment."],
+  ["02", "Review", "The application is sent by email. It is not an assignment."],
   ["03", "Assessment", "A project can still require an assessment before paid tasks."],
   ["04", "Assignment", "Talent operations decide. An application is not a promise of work."],
 ] as const;

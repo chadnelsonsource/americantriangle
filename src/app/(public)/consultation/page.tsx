@@ -7,14 +7,14 @@ import { interestFromQuery } from "@/services/leads";
 
 export const metadata = pageMetadata(
   "Request a consultation",
-  "Describe a data, evaluation, or application engagement. The inquiry is sent by email and saved when the store is available.",
+  "Describe a data, evaluation, or application engagement. The inquiry is sent by email.",
   "/consultation",
 );
 
 const questions = [
   {
     question: "Does a consultation start the project?",
-    answer: "No. Discovery, a recommendation, and an estimate are later records. This form sends the request by email and saves it when the store is available.",
+    answer: "No. Discovery, a recommendation, and an estimate are later records. This form sends the request by email.",
   },
   {
     question: "Which area should I pick?",

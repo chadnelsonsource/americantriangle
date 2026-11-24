@@ -130,7 +130,7 @@ export function PartnershipForm({ defaultCategory = "" }: { defaultCategory?: Pa
           error={state.fieldErrors?.consent}
         />
         <p className="text-sm leading-6 text-muted">
-          No account or sign-in is required. Your name, email, organization, website if you add one, category, proposed collaboration, experience, and any additional details are sent by email. They are saved when the inquiry store is available. A proposal is not an agreement, a listing, or an endorsement. The{" "}
+          No account or sign-in is required. Your name, email, organization, website if you add one, category, proposed collaboration, experience, and any additional details are sent by email. A proposal is not an agreement, a listing, or an endorsement. The{" "}
           <Link href="/privacy" className="text-ink underline decoration-line underline-offset-4">privacy page</Link> and{" "}
           <Link href="/terms" className="text-ink underline decoration-line underline-offset-4">terms page</Link> describe the product. Counsel has not issued binding text.
         </p>

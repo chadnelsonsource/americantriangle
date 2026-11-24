@@ -1,8 +1,5 @@
 import { brandLine, brandSupport } from "@/config/brand";
 
-/** Public sign-in, registration, and the header Get started control. Turn back on when account entry should show. */
-export const showAccountEntry = false;
-
 export const site = {
   name: "Americantriangle",
   title: "Americantriangle",

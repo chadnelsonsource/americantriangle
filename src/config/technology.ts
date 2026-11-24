@@ -166,17 +166,17 @@ export const capabilityGroups: readonly CapabilityGroup[] = [
     id: "infrastructure",
     eyebrow: "Infrastructure and deployment",
     title: "One application. Named hosts. No production claim.",
-    lede: "The deployment notes name Vercel for the application and Supabase for PostgreSQL, Auth, and Storage. Neither is provisioned from this repository. There is no second cloud and no uptime target.",
+    lede: "The deployment notes name Vercel for the application. A hosted project is not provisioned from this repository. There is no database, no second cloud, and no uptime target.",
     items: [
       {
         title: "Cloud infrastructure",
         status: "project",
-        body: "Vercel and Supabase are the named targets. A hosted project is not connected. This page does not name another cloud, a region, or a private network.",
+        body: "Vercel is the named application host. A hosted project is not connected. This page does not name another cloud, a region, or a private network.",
       },
       {
         title: "Deployment architecture",
         status: "release",
-        body: "The shape is one Next.js application. Schema changes go through SQL migrations. Row level security is declared and has not been applied to a hosted database.",
+        body: "The shape is one Next.js application. Public inquiries are email. There is no database schema in this application.",
       },
       {
         title: "Monitoring",
@@ -186,7 +186,7 @@ export const capabilityGroups: readonly CapabilityGroup[] = [
       {
         title: "Operational reliability",
         status: "release",
-        body: "A Stripe event is accepted only when the signature matches. A duplicate event id does not add a second ledger credit. Payouts are not sent. No availability figure is stated.",
+        body: "A Stripe event is accepted only when the signature matches. The event is not stored. Payouts are not sent. No availability figure is stated.",
       },
     ],
     links: [
@@ -229,7 +229,7 @@ export const toolGroups: readonly ToolGroup[] = [
   {
     title: "Application",
     items: [
-      { name: "Next.js", status: "repository", body: "App Router. The public site and the workspaces are one application." },
+      { name: "Next.js", status: "repository", body: "App Router. The public site is one application." },
       { name: "React", status: "repository", body: "The interface layer. Business rules stay in domain services." },
       { name: "TypeScript", status: "repository", body: "Strict mode for the application code." },
       { name: "Tailwind CSS", status: "repository", body: "The shared visual tokens. No second design system." },
@@ -238,9 +238,7 @@ export const toolGroups: readonly ToolGroup[] = [
   {
     title: "Data and access",
     items: [
-      { name: "PostgreSQL", status: "repository", body: "The schema is in SQL migrations. No hosted database is connected." },
-      { name: "Supabase Auth", status: "repository", body: "Email and password sessions when the project is configured." },
-      { name: "Supabase Storage", status: "repository", body: "Private buckets are declared in a migration. They are not applied to a hosted project." },
+      { name: "Email inquiries", status: "repository", body: "Contact, consultation, partnership, and expert forms send email. They do not write to a database." },
     ],
   },
   {
@@ -248,7 +246,7 @@ export const toolGroups: readonly ToolGroup[] = [
     items: [
       { name: "Zod", status: "repository", body: "Server-side checks for forms and domain input." },
       { name: "Inngest", status: "repository", body: "Function definitions are in the repository. The signing keys are unset." },
-      { name: "Stripe", status: "repository", body: "The webhook checks a signature and stores the event id. Connect payouts are not sent." },
+      { name: "Stripe", status: "repository", body: "The webhook checks a signature. The event is not stored. Connect payouts are not sent." },
       { name: "Resend", status: "repository", body: "Email is sent only when the API key and the from-address are set." },
     ],
   },
@@ -270,7 +268,7 @@ export const toolGroups: readonly ToolGroup[] = [
     title: "Hosting targets",
     items: [
       { name: "Vercel", status: "target", body: "Named as the application host. A production project is not provisioned here." },
-      { name: "Supabase", status: "target", body: "Named for PostgreSQL, Auth, and Storage. A hosted project is not connected." },
+      { name: "Resend domain", status: "target", body: "The from-address sends only after its domain is verified with the email provider." },
     ],
   },
   {

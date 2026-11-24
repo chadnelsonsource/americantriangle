@@ -58,7 +58,7 @@ const questions = [
   {
     question: "How does expert work start?",
     answer:
-      "Use the contributor page and submit the application. No account or sign-in is required. The inquiry is stored for review. It does not guarantee paid work.",
+      "Use the contributor page and submit the application. The inquiry is sent by email. It does not guarantee paid work.",
   },
   {
     question: "Is a contributor a staff employee?",

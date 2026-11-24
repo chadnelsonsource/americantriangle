@@ -7,7 +7,7 @@ alwaysApply: true
 
 The approved shape is a modular monolith. The stack below is the target. It is not installed until the roadmap step that adds it. See `docs/DEVELOPMENT_STATUS.md`.
 
-Next.js App Router, React, TypeScript strict mode, PostgreSQL through Supabase, Supabase Auth, Supabase Storage, Tailwind CSS, shadcn/ui, Zod, Inngest, Stripe, Resend, Sentry, PostHog, Vitest, Playwright.
+Next.js App Router, React, TypeScript strict mode, Tailwind CSS, Zod, Resend for inquiry email, Stripe signature checks, Vitest, Playwright. This application has no accounts and no Supabase database.
 
 ## Domains
 

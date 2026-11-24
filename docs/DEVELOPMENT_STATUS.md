@@ -53,7 +53,8 @@ Primary reference: [MASTER_DEVELOPMENT_ROADMAP.md](MASTER_DEVELOPMENT_ROADMAP.md
 - Interior pages open on the light canvas, with the same navy type and a cyan label. Shared cards, catalog rows, and closing invitations use a rounder corner and a softer shadow. The homepage hero is unchanged.
 - Public sections fade and rise once as they enter the viewport. Content already on screen stays put, and scrolling back does not replay the entrance. The homepage hero, forms, and the capability diagram stay still. Reduced motion shows every section immediately.
 - The public header and its menus use the theme canvas and card colors. Light stays a frosted white bar. Dark stays a frosted navy bar, so the wordmark and links remain readable.
-- Public sign-in, account creation, and the header Get started control are hidden. `showAccountEntry` in `src/config/site.ts` turns them back on. The login and registration routes remain.
+- Sign-in, sign-up, workspaces, and Supabase are removed from this application. Public forms send email through Resend. There is no account and no inquiry database.
+- The homepage hero is left-aligned, with one primary action and the service links in a bar under it. Service rows move an arrow on hover. Quality copy describes a person, a second reader, and a named result. No customer proof was added.
 - The Company menu in the header and the footer keeps About, Enterprise solutions, Industries, Trust, and Contact, plus Privacy, Terms, and Cookies in the footer. Platform, Technology, Quality, Insights, Resources, Contributors, and Partnerships stay as pages and are no longer listed there.
 - The About page no longer shows the health-research photograph or its credit. The image file remains in the repository.
 - The Industries page no longer shows the laboratory-bench photograph or its credit. The image file remains in the repository.

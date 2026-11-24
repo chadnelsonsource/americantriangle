@@ -54,7 +54,7 @@ Do not use fake data in production. Label demo data and development-only behavio
 This stack is the approved direction. It is not installed until the roadmap step that adds it says so. See [docs/DEVELOPMENT_STATUS.md](docs/DEVELOPMENT_STATUS.md).
 
 - Next.js App Router, React, TypeScript strict mode
-- PostgreSQL through Supabase, Supabase Auth, Supabase Storage
+- Public inquiries by email through Resend. No accounts and no Supabase database in this application.
 - Tailwind CSS and shadcn/ui
 - Zod for validation
 - Inngest for durable background workflows

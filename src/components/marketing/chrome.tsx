@@ -7,7 +7,6 @@ import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { ButtonLink } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 import { headerNav } from "@/config/catalog";
-import { showAccountEntry } from "@/config/site";
 import { NavLink } from "@/components/marketing/nav-link";
 
 export function SiteHeader() {
@@ -46,16 +45,9 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="hidden items-center gap-2 md:flex">
-          {showAccountEntry ? (
-            <>
-              <ButtonLink href="/login" variant="ghost">
-                Sign in
-              </ButtonLink>
-              <ButtonLink href="/consultation" variant="primary" className="rounded-full px-5">
-                Get started
-              </ButtonLink>
-            </>
-          ) : null}
+          <ButtonLink href="/consultation" variant="accent" className="rounded-full px-5">
+            Request a consultation
+          </ButtonLink>
           <ThemeToggle />
         </div>
       </div>
@@ -67,16 +59,9 @@ export function SiteHeader() {
             ))}
           </nav>
           <div className="mt-4 flex flex-col gap-2">
-            {showAccountEntry ? (
-              <>
-                <ButtonLink href="/login" variant="secondary">
-                  Sign in
-                </ButtonLink>
-                <ButtonLink href="/consultation" variant="primary" className="rounded-full">
-                  Get started
-                </ButtonLink>
-              </>
-            ) : null}
+            <ButtonLink href="/consultation" variant="primary" className="rounded-full">
+              Request a consultation
+            </ButtonLink>
             <ThemeToggle />
           </div>
         </div>

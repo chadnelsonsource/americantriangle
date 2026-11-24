@@ -2,7 +2,6 @@
 
 import { isRateLimited } from "@/services/operations";
 import { INDUSTRY_LABELS, INDUSTRIES, INQUIRY_LABELS, PARTNERSHIP_LABELS, leadResult, reviewLead, routeLead, type Industry, type PartnershipCategory } from "@/services/leads";
-import { insertLead } from "@/server/repositories/leads";
 import { sendTransactionalEmail } from "@/server/email/send";
 
 export type LeadFormState = {
@@ -48,21 +47,13 @@ export async function submitLead(_previous: LeadFormState, formData: FormData): 
   }
 
   const route = routeLead(reviewed.lead.inquiryType);
-  const saved = await insertLead(reviewed.lead, route);
-  const stored = saved.ok;
   const partnership = reviewed.lead.inquiryType === "partnerships";
   const expert = reviewed.lead.inquiryType === "expert";
-  const confirmation = stored
-    ? partnership
-      ? "We received your partnership proposal and stored it for review. This message is not a partnership agreement, a contract, or an endorsement."
-      : expert
-        ? "We received your expert application and stored it for review. No account was created. This message is not an assignment or a job offer."
-        : "We received your inquiry and stored it for review. No account was created. This message is not a contract or a quote."
-    : partnership
-      ? "We received your partnership proposal by email. It was not saved in the inquiry store. This message is not a partnership agreement, a contract, or an endorsement."
-      : expert
-        ? "We received your expert application by email. It was not saved in the inquiry store. No account was created. This message is not an assignment or a job offer."
-        : "We received your inquiry by email. It was not saved in the inquiry store. No account was created. This message is not a contract or a quote.";
+  const confirmation = partnership
+    ? "We received your partnership proposal by email. This message is not a partnership agreement, a contract, or an endorsement."
+    : expert
+      ? "We received your expert application by email. No account was created. This message is not an assignment or a job offer."
+      : "We received your inquiry by email. No account was created. This message is not a contract or a quote.";
   const emailResult = await sendTransactionalEmail({
     to: reviewed.lead.email,
     subject: "Americantriangle received your inquiry",
@@ -81,7 +72,7 @@ export async function submitLead(_previous: LeadFormState, formData: FormData): 
       to: notify,
       subject: `Inquiry: ${INQUIRY_LABELS[reviewed.lead.inquiryType]}`,
       text: [
-        stored ? "A new inquiry was stored." : "A new inquiry was sent by email. It was not saved in the inquiry store.",
+        "A new inquiry was sent by email.",
         `Area: ${INQUIRY_LABELS[reviewed.lead.inquiryType]}`,
         `Route: ${route}`,
         `Name: ${reviewed.lead.name}`,
@@ -103,24 +94,22 @@ export async function submitLead(_previous: LeadFormState, formData: FormData): 
     });
     teamNotified = teamResult.ok;
   }
-  if (!stored && !emailResult.ok && !teamNotified) {
+  if (!emailResult.ok && !teamNotified) {
     if (emailResult.error === "email_not_configured") {
-      return { status: "error", message: "Email delivery is not configured, and the inquiry was not saved." };
+      return { status: "error", message: "Email delivery is not configured." };
     }
     return leadResult({
       stored: false,
       emailSent: false,
-      reference: (!saved.ok ? saved.errorId : undefined) ?? (!emailResult.ok ? emailResult.errorId : undefined),
+      reference: emailResult.errorId,
     });
   }
   attempts.set(email, [...prior, now].slice(-5));
-  if (!stored) {
+  if (!emailResult.ok) {
     return {
       status: "received",
-      message: emailResult.ok
-        ? "Your inquiry was sent by email. It was not saved in the inquiry store. No account was created."
-        : "Your inquiry was sent to the team by email. A confirmation could not be sent to you. It was not saved in the inquiry store. No account was created.",
+      message: "Your inquiry was sent to the team by email. A confirmation could not be sent to you. No account was created.",
     };
   }
-  return leadResult({ stored: true, emailSent: emailResult.ok, reference: emailResult.ok ? undefined : emailResult.errorId });
+  return { status: "received", message: "Your inquiry was sent by email. No account was created." };
 }

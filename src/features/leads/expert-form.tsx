@@ -93,7 +93,7 @@ export function ExpertApplicationForm() {
           error={state.fieldErrors?.consent}
         />
         <p className="text-sm leading-6 text-muted">
-          No account or sign-in is required. Your name, email, organization if you add one, expertise, and description are sent by email. They are saved when the inquiry store is available. This does not create an account, an assignment, or a job offer. The{" "}
+          No account or sign-in is required. Your name, email, organization if you add one, expertise, and description are sent by email. This does not create an account, an assignment, or a job offer. The{" "}
           <Link href="/privacy" className="text-ink underline decoration-line underline-offset-4">
             privacy page
           </Link>{" "}

@@ -13,7 +13,7 @@ export default function CookiesPage() {
     <MarketingArticle
       eyebrow="Cookies"
       title="What this browser stores."
-      lede="This page describes the theme preference and the sign-in session. It is not a cookie policy. Counsel has not issued one."
+      lede="This page describes the theme preference stored in the browser. It is not a cookie policy. Counsel has not issued one."
       current="/cookies"
     >
       <CounselNote>
@@ -23,8 +23,8 @@ export default function CookiesPage() {
       <h2 id="theme">Theme preference</h2>
       <p>The Theme control saves the word “light” or “dark” in the browser’s local storage under the key “theme”. The site reads that value to paint the page. This application does not send the preference to a server. If no choice is saved, the page follows the browser’s color-scheme setting until you pick one.</p>
 
-      <h2 id="session">Sign-in session</h2>
-      <p>When the authentication service is configured, signing in sets session cookies so the account stays signed in. Signing out clears them. They identify the session. They are not an advertising identifier. If authentication is not configured, the sign-in action does not create that session.</p>
+      <h2 id="session">No account session</h2>
+      <p>The public site does not create an account or a sign-in session. Submitting a form does not set an authentication cookie.</p>
 
       <h2 id="absent">What is not installed</h2>
       <p>

@@ -101,13 +101,13 @@ export default function TrustPage() {
           />
           <Control
             status="declared"
-            title="Storage buckets are private in the migration"
-            body="Contributor documents, project files, and dataset exports are declared as private buckets. Those policies have not been applied to a hosted project here."
+            title="This site does not store uploaded files"
+            body="Public forms send text by email. They do not accept a file upload, and this application does not connect a file store."
           />
           <Control
             status="absent"
             title="Retention is not set"
-            body="How long records are kept has not been decided. Account export and deletion can be requested from a signed-in account. The request is recorded when the audit store is configured. The form does not delete the account by itself."
+            body="How long an emailed inquiry is kept has not been decided. This site does not create an account to export or delete."
           />
         </div>
       </Section>
@@ -116,8 +116,8 @@ export default function TrustPage() {
         <div className="grid gap-4 md:grid-cols-2">
           <Control
             status="software"
-            title="Workspaces require a session when auth is configured"
-            body="Contributor, client, internal, and account routes redirect to sign-in when the authentication service is configured and there is no user. The registration action only offers a contributor or client account."
+            title="The public site has no accounts"
+            body="There is no sign-in, sign-up, or password. A form submission emails the inquiry. It does not open a workspace."
           />
           <Control
             status="software"
@@ -126,13 +126,13 @@ export default function TrustPage() {
           />
           <Control
             status="software"
-            title="The privileged database key stays on the server"
-            body="The service-role client is a server module. Pages and components are tested so they do not import it. It is not a browser key."
+            title="No database key is in this application"
+            body="The public site does not connect a database client. Inquiry text leaves the server only in the email that Resend sends when email is configured."
           />
           <Control
             status="declared"
-            title="Row-level policies are written and not yet run"
-            body="Migrations enable row-level security for tenant data, a person's own submissions, finance records, and lead reads. The profile function refuses a staff account on public signup and blocks role changes except by a super administrator. None of this has been executed against a hosted database."
+            title="There is no tenant database on this site"
+            body="Organization isolation, staff roles, and row-level policies are not part of this public application. An inquiry is an email, not a row another organization could read."
           />
         </div>
       </Section>
@@ -142,7 +142,7 @@ export default function TrustPage() {
           <Control
             status="software"
             title="Payment webhooks check a signature"
-            body="A Stripe event is accepted only when the signature matches. The event id is stored so the same event is not applied twice. Payouts are not sent."
+            body="A Stripe event is accepted only when the signature matches. This application does not store the event or send a payout."
           />
           <Control
             status="software"

@@ -31,7 +31,7 @@ const stages = [
   ["01", "Requested", "An inquiry names the service, the material, and the constraints."],
   ["02", "Proposed", "The delivery team turns that inquiry into a scope the client can see."],
   ["03", "Production", "Qualified contributors receive assigned work. A different person reviews it."],
-  ["04", "Delivery", "Approved work, files, and invoices stay inside that client organization."],
+  ["04", "Delivery", "The client receives the agreed record. Sending the inquiry is not that delivery."],
 ];
 
 const startingPoints = [
@@ -49,17 +49,17 @@ const startingPoints = [
   },
   {
     question: "What happens after I submit?",
-    answer: "The inquiry is sent by email and saved when the store is available. It does not assign a contributor, set a rate, or create the project. A collaboration uses the partnership form. An expert uses the application form.",
+    answer: "The inquiry is sent by email. It does not assign a contributor, set a rate, or create the project. A collaboration uses the partnership form. An expert uses the application form.",
   },
 ] as const;
 
 const quality = [
-  ["Human experts", "Contributors complete a profile and an assessment before they see paid work."],
-  ["Independent review", "The first release uses one review layer: someone other than the author scores the work."],
-  ["Quality record", "Accept, return, and reject decisions stay with the submission."],
-  ["Data isolation", "A client organization sees its own projects, files, and invoices."],
-  ["Separate payout states", "An invoice does not mark work paid. Approval and payout stay separate."],
-  ["Audit events", "Account and operational actions can be written to an audit record."],
+  ["A named person", "Someone can explain the work. The service names who prepares it or scores it."],
+  ["A second reader", "When review is part of the service, a different person accepts, returns, or rejects the work."],
+  ["A defined result", "The client receives labels, a score, or the scoped system. Preparing data is not a training run."],
+  ["A written scope", "The inquiry names the material and the constraint. It does not start the project by itself."],
+  ["Separate money", "An inquiry is not an invoice, and an invoice is not a payout."],
+  ["No public proof list", "This site does not publish customers, ratings, or a certification."],
 ];
 
 export default function HomePage() {
@@ -74,14 +74,14 @@ export default function HomePage() {
         />
         <HeroReel />
         <div className="hero-wash absolute inset-0" aria-hidden="true" />
-        <div className="page relative flex min-h-[calc(100svh-4.5rem)] flex-col items-center justify-center pb-12 pt-16 text-center md:pt-20">
+        <div className="page relative flex min-h-[calc(100svh-4.5rem)] flex-col justify-end pb-16 pt-28 md:justify-center md:pb-24 md:pt-24">
           <p className="eyebrow text-white/75">Talent · Technology · Opportunity</p>
-          <h1 className="heading-display mt-6 text-white">
+          <h1 className="heading-display mt-5 max-w-[12em] text-white">
             The human layer behind
             <span className="mt-1 block font-serif italic text-accent">reliable AI.</span>
           </h1>
-          <p className="measure mt-6 text-sm leading-6 text-white/80 md:text-base">{brandPhilosophy}</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <p className="measure mt-6 text-base leading-7 text-white/80">{brandPhilosophy}</p>
+          <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink href="/consultation" variant="accent" className="rounded-full px-6">
               Request a consultation
             </ButtonLink>
@@ -89,26 +89,29 @@ export default function HomePage() {
               Enterprise solutions
             </ButtonLink>
           </div>
-          <p className="mt-3">
+          <p className="mt-4">
             <Link href="/contributors/join" className="inline-flex min-h-11 items-center text-sm text-white underline decoration-white/40 underline-offset-4 hover:decoration-white">
               Apply as an expert
             </Link>
           </p>
-          <ul className="mt-14 flex max-w-3xl flex-wrap justify-center gap-x-6 gap-y-1 border-t border-white/25 py-3 text-white/75">
-            {capabilities.map(([href, label]) => (
-              <li key={href}>
-                <Link href={href} className="eyebrow inline-flex min-h-11 items-center gap-2 hover:text-white">
-                  <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  {label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-4 max-w-xl text-xs leading-5 text-white/70">
+          <p className="mt-10 max-w-xl text-xs leading-5 text-white/70">
             Data-center engineers, then an engineering meeting at their computers. These are not Americantriangle teams, facilities, or clients. Videos from Mixkit.
           </p>
         </div>
       </section>
+
+      <nav className="border-b border-line bg-canvas" aria-label="Services">
+        <ul className="page flex gap-x-6 gap-y-1 overflow-x-auto py-1 text-muted">
+          {capabilities.map(([href, label]) => (
+            <li key={href} className="shrink-0">
+              <Link href={href} className="eyebrow inline-flex min-h-11 items-center gap-2 hover:text-ink">
+                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       <section className="page py-16 md:py-24">
         <p className="eyebrow text-muted">Three divisions</p>
@@ -121,17 +124,44 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="bg-paper">
+        <div className="page py-16 md:py-24">
+        <p className="eyebrow text-muted">How an engagement starts</p>
+        <h2 className="heading-title mt-4">One requirement. A record someone else can check.</h2>
+        <p className="measure mt-5 leading-7 text-muted">
+          Start with the work you need. The consultation names the division. The result is the record that division produces.
+        </p>
+        <ol className="mt-10 grid gap-4 md:grid-cols-3">
+          {[
+            ["01", "Name the requirement", "Describe a dataset to review, a model to judge, or a system to build. One division is enough."],
+            ["02", "Separate the doer from the reviewer", "A person prepares or scores the work. A different person checks it when the service requires that."],
+            ["03", "Receive the scoped record", "The result is the labeled set, the evaluation, or the agreed application. It is not a claimed return."],
+          ].map(([step, title, body]) => (
+            <li key={step} className="surface p-6">
+              <p className="font-serif text-sm text-copper">{step}</p>
+              <h3 className="mt-3 text-2xl">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted">{body}</p>
+            </li>
+          ))}
+        </ol>
+        </div>
+      </section>
+
       <CapabilityCycle />
 
       <section className="page pb-16 md:pb-24">
         <p className="eyebrow text-muted">Services</p>
         <h2 className="heading-title mt-4">Choose the work by its name.</h2>
-        <ul className="mt-10 divide-y divide-line/80">
+        <p className="measure mt-5 leading-7 text-muted">Each row is one service. Open it to see the record a client receives.</p>
+        <ul className="mt-8 divide-y divide-line/80">
           {serviceIndex.map(([href, title, body]) => (
             <li key={href}>
-              <Link href={href} className="grid gap-2 rounded-2xl px-4 py-5 transition-colors hover:bg-card lg:grid-cols-[16rem_1fr] lg:items-baseline lg:gap-8">
+              <Link href={href} className="group grid gap-2 rounded-2xl px-4 py-6 transition-colors hover:bg-card lg:grid-cols-[16rem_1fr_auto] lg:items-center lg:gap-8">
                 <h3 className="text-2xl">{title}</h3>
                 <p className="text-sm leading-6 text-muted">{body}</p>
+                <span aria-hidden className="text-copper transition-transform group-hover:translate-x-1">
+                  →
+                </span>
               </Link>
             </li>
           ))}
@@ -161,7 +191,7 @@ export default function HomePage() {
       </section>
 
       <section className="page pb-16 md:pb-24">
-        <h2 className="heading-title">How an engagement is recorded.</h2>
+        <h2 className="heading-title">How the work proceeds.</h2>
         <div className="surface mt-10 hidden px-4 py-6 lg:block">
           <WorkflowDiagram />
         </div>
@@ -185,7 +215,7 @@ export default function HomePage() {
         <div>
           <p className="eyebrow text-muted">How work is judged</p>
           <h2 className="heading-title mt-4">Quality is a system, not a promise.</h2>
-          <p className="measure mt-5 leading-7 text-muted">Every claim on this page maps to a record the platform can store: a person, a review, a file, or a payment state.</p>
+          <p className="measure mt-5 leading-7 text-muted">Quality here is a person, a second reader, and a result that can be named. It is not a score published about Americantriangle.</p>
           <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm leading-6">
             <Link href="/quality" className="inline-flex min-h-11 items-center text-ink underline decoration-line underline-offset-4 hover:decoration-ink">
               Quality across the three divisions
@@ -237,7 +267,7 @@ export default function HomePage() {
         <div className="rounded-2xl border border-white/15 bg-night px-7 py-8 text-band md:px-8 md:py-10">
           <p className="eyebrow text-band/75">For organizations</p>
           <h2 className="mt-4 max-w-md text-3xl text-band">Have a system to evaluate, build, or ship?</h2>
-          <p className="measure mt-4 text-sm leading-6 text-band/80">Describe the service. The inquiry is stored for the internal queue. It is not a contract.</p>
+          <p className="measure mt-4 text-sm leading-6 text-band/80">Describe the service. The inquiry is sent by email. It is not a contract.</p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <ButtonLink href="/consultation" variant="accent">
               Request a consultation
@@ -251,7 +281,7 @@ export default function HomePage() {
           <p className="eyebrow text-muted">For experts</p>
           <h2 className="mt-4 max-w-md text-3xl">Put your expertise on reviewed work.</h2>
           <p className="measure mt-4 text-sm leading-6 text-muted">
-            Apply, complete a profile, and pass an assessment before paid tasks are assigned.
+            Send an application by email. It does not assign paid work.
           </p>
           <div className="mt-8">
             <ButtonLink href="/contributors/join" variant="primary">
