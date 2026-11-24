@@ -5,7 +5,7 @@ import { pageMetadata } from "@/config/seo";
 
 export const metadata = pageMetadata(
   "Careers",
-  "Expert qualification and staff openings are different paths. No staff role is listed until one is approved. Registration does not assign work.",
+  "Expert applications and staff openings are different paths. No staff role is listed until one is approved. An application does not assign work.",
   "/careers",
 );
 

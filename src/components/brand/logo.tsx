@@ -10,7 +10,7 @@ export function Logo({
 }) {
   return (
     <span className={cn("inline-flex items-center", className)}>
-      <img src="/images/logo1.png" alt="Americantriangle" width={643} height={636} className={cn("h-14 w-auto", imageClassName)} />
+      <img src="/images/logo2.png" alt="Americantriangle" width={1096} height={469} className={cn("h-14 w-auto", imageClassName)} />
     </span>
   );
 }

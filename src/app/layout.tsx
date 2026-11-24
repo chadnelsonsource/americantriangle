@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import { Newsreader, Outfit } from "next/font/google";
-import { appUrl, site } from "@/config/site";
+import { site, siteOrigin } from "@/config/site";
 import "@/styles/globals.css";
 
-const sans = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
-const serif = Newsreader({ subsets: ["latin"], variable: "--font-newsreader" });
+const sans = Outfit({ subsets: ["latin"], variable: "--font-outfit", display: "swap" });
+const serif = Newsreader({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-newsreader", display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(appUrl()),
+  metadataBase: new URL(siteOrigin),
   title: { default: site.name, template: `%s · ${site.name}` },
   description: site.description,
   applicationName: site.name,
+  robots: { index: true, follow: true },
   icons: {
     icon: [
       { url: "/favicon_io/favicon.ico" },
@@ -24,11 +25,19 @@ export const metadata: Metadata = {
     title: site.positioning,
     description: site.description,
     siteName: site.name,
+    url: siteOrigin,
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Americantriangle. The human layer behind reliable AI." }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.positioning,
+    description: site.description,
+    images: ["/opengraph-image"],
   },
 };
 
-const themeScript = `try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.classList.add("dark")}}catch(e){}`;
+const themeScript = `try{var t=localStorage.getItem("theme");if(t==="dark"){document.documentElement.classList.add("dark")}}catch(e){}`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

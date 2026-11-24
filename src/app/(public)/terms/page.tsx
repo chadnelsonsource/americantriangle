@@ -4,7 +4,7 @@ import { pageMetadata } from "@/config/seo";
 
 export const metadata = pageMetadata(
   "Terms",
-  "Americantriangle has not issued binding terms of service. An inquiry or registration is a product action, not a contract.",
+  "Americantriangle has not issued binding terms of service. Sending an inquiry is not a contract.",
   "/terms",
 );
 

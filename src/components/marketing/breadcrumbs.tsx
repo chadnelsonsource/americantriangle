@@ -1,8 +1,21 @@
 import Link from "next/link";
+import { JsonLd } from "@/components/seo/json-ld";
+import { canonicalUrl } from "@/config/site";
 
 export function Breadcrumbs({ items }: { items: readonly { href?: string; label: string }[] }) {
+  const structured = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.label,
+      ...(item.href ? { item: canonicalUrl(item.href) } : {}),
+    })),
+  };
   return (
     <nav aria-label="Breadcrumb" className="mb-6">
+      <JsonLd data={structured} />
       <ol className="flex flex-wrap items-center gap-2 text-xs text-muted">
         {items.map((item, index) => (
           <li key={item.label} className="flex items-center gap-2">

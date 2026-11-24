@@ -2,8 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ShareLinks } from "@/components/marketing/share-links";
 import { PageHero } from "@/components/marketing/sections";
+import { JsonLd } from "@/components/seo/json-ld";
 import { articleMetadata } from "@/config/seo";
-import { appUrl } from "@/config/site";
+import { canonicalUrl, site, siteOrigin } from "@/config/site";
 import { categoryBySlug, insightBySlug, INSIGHT_KIND_LABELS, publishedInsights, readingMinutes, relatedInsights } from "@/content/insights";
 
 export function generateStaticParams() {
@@ -31,21 +32,24 @@ export default async function InsightArticlePage({ params }: { params: Promise<{
   const article = insightBySlug(slug);
   if (!article) notFound();
   const category = categoryBySlug(article.category);
-  const url = new URL(`/insights/${article.slug}`, appUrl()).toString();
+  const url = canonicalUrl(`/insights/${article.slug}`);
   const related = relatedInsights(article);
-  const structured = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: article.title,
-    description: article.summary,
-    datePublished: article.publishedOn,
-    dateModified: article.updatedOn,
-    author: { "@type": "Person", name: article.author.name, jobTitle: article.author.role },
-    mainEntityOfPage: url,
-  };
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured) }} />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: article.title,
+          description: article.summary,
+          datePublished: article.publishedOn,
+          dateModified: article.updatedOn,
+          author: { "@type": "Person", name: article.author.name, jobTitle: article.author.role },
+          publisher: { "@id": `${siteOrigin}/#organization`, name: site.name },
+          mainEntityOfPage: url,
+          image: `${siteOrigin}/opengraph-image`,
+        }}
+      />
       <PageHero
         eyebrow={category?.label ?? "Insights"}
         title={article.title}

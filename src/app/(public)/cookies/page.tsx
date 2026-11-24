@@ -21,7 +21,7 @@ export default function CookiesPage() {
       </CounselNote>
 
       <h2 id="theme">Theme preference</h2>
-      <p>The Theme control saves the word “light” or “dark” in the browser’s local storage under the key “theme”. The site reads that value to paint the page. This application does not send the preference to a server. If no choice is saved, the page follows the browser’s color-scheme setting until you pick one.</p>
+      <p>The Theme control saves the word “light” or “dark” in the browser’s local storage under the key “theme”. The site reads that value to paint the page. This application does not send the preference to a server. If no choice is saved, the page uses the light theme.</p>
 
       <h2 id="session">No account session</h2>
       <p>The public site does not create an account or a sign-in session. Submitting a form does not set an authentication cookie.</p>

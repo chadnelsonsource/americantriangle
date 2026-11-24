@@ -4,7 +4,7 @@ import { pageMetadata } from "@/config/seo";
 
 export const metadata = pageMetadata(
   "Privacy",
-  "How the Americantriangle software handles account, inquiry, and project data. Not a legal privacy policy.",
+  "How Americantriangle handles an emailed inquiry. This site does not create an account. This page is not a legal privacy policy.",
   "/privacy",
 );
 

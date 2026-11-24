@@ -3,7 +3,11 @@ import { InquiryLayout, PageHero } from "@/components/marketing/sections";
 import { pageMetadata } from "@/config/seo";
 import { LeadForm } from "@/features/leads/lead-form";
 
-export const metadata = pageMetadata("Contact", "Describe a project for Americantriangle. The inquiry is sent by email. It is not a contract.", "/contact");
+export const metadata = pageMetadata(
+  "Contact",
+  "Send a project inquiry to Americantriangle by email. Name the service and the constraint. The form is not a contract.",
+  "/contact",
+);
 
 const questions = [
   {

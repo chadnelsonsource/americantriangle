@@ -47,7 +47,7 @@ Motion is 180ms for color, menus, and the mobile dialog, and 420ms for a 0.4rem 
 
 ## Logo
 
-The logo is `public/images/logo1.png`, rendered by `src/components/brand/logo.tsx` and described in [BRAND_ASSETS.md](BRAND_ASSETS.md). The file includes the triangle and the line “Talent. Technology. Opportunity.” Do not redraw it per page. Do not place the mark on a photograph with a glow. The file is transparent in both themes. Do not put a plate behind it.
+The logo is `public/images/logo2.png`, rendered by `src/components/brand/logo.tsx` and described in [BRAND_ASSETS.md](BRAND_ASSETS.md). The file includes the triangle and the wordmark. Do not redraw it per page. Do not place the mark on a photograph with a glow. The file is transparent in both themes. Do not put a plate behind it. The site starts in the light theme unless the visitor has saved dark.
 
 ## Imagery
 

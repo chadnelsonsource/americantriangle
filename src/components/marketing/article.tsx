@@ -1,4 +1,6 @@
 import { ButtonLink } from "@/components/ui/button";
+import { JsonLd } from "@/components/seo/json-ld";
+import { canonicalUrl } from "@/config/site";
 
 const documents = [
   { href: "/privacy", label: "Privacy" },
@@ -48,6 +50,16 @@ export function MarketingArticle({
 }) {
   return (
     <article className="page py-16 md:py-24">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: canonicalUrl("/") },
+            { "@type": "ListItem", position: 2, name: title },
+          ],
+        }}
+      />
       <p className="eyebrow text-muted">{eyebrow}</p>
       <h1 className="heading-display mt-4">{title}</h1>
       <p className="measure mt-5 text-base leading-7 text-muted">{lede}</p>

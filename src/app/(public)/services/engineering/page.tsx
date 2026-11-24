@@ -14,6 +14,7 @@ export default function EngineeringPage() {
       eyebrow="The implementation"
       title="Turning AI capabilities into real-world business solutions."
       lede="This division ships an agent, an application, an integration, or an operating handoff. Talent is the specialist who builds it. Technology is the application, agent, or integration in the scope. The opportunity is the workflow the client needs in operation. Practical value is the system that was scoped and approved. It is not a claimed return, and it does not require a data project or a training project first."
+      path="/services/engineering"
       crumbs={[
         { href: "/", label: "Home" },
         { label: "Enterprise applications" },

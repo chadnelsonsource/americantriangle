@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/marketing/sections";
+import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata } from "@/config/seo";
+import { canonicalUrl, site, siteOrigin } from "@/config/site";
 import { noteBySlug, notes, readingMinutes } from "@/content/notes";
 
 export function generateStaticParams() {
@@ -23,6 +25,18 @@ export default async function NotePage({ params }: { params: Promise<{ slug: str
   const others = notes.filter((item) => item.slug !== note.slug);
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: note.title,
+          description: note.summary,
+          datePublished: note.published,
+          author: { "@id": `${siteOrigin}/#organization`, name: site.name },
+          publisher: { "@id": `${siteOrigin}/#organization`, name: site.name },
+          mainEntityOfPage: canonicalUrl(`/resources/${note.slug}`),
+        }}
+      />
       <PageHero
         eyebrow={note.category}
         title={note.title}

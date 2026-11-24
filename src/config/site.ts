@@ -11,6 +11,14 @@ export function appUrl(): string {
   return process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 }
 
+/** Public origin used for canonical URLs, the sitemap, and social metadata. */
+export const siteOrigin = "https://americantriangle.com";
+
+export function canonicalUrl(path: string): string {
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  return normalized === "/" ? siteOrigin : `${siteOrigin}${normalized}`;
+}
+
 export const publicRoutes = [
   "/",
   "/services/data",
@@ -57,3 +65,6 @@ export const publicRoutes = [
   "/terms",
   "/cookies",
 ] as const;
+
+/** Search is a filter, not a document. It stays out of the sitemap. */
+export const indexablePublicRoutes = publicRoutes.filter((path) => path !== "/insights/search");

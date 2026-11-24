@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BackToTop } from "@/components/marketing/back-to-top";
 
 const legal = [
   { href: "/privacy", label: "Privacy" },
@@ -9,7 +10,7 @@ const legal = [
 export function SiteFooter() {
   return (
     <footer className="border-t border-white/10 bg-night text-band">
-      <div className="page flex flex-col gap-4 py-4 md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-8 md:py-5">
+      <div className="page flex flex-col gap-4 pb-20 pt-4 sm:flex-row sm:items-center sm:justify-between md:py-5 md:pr-24">
         <p className="text-sm text-band/80">
           <span className="block text-band">Talent. Technology. Opportunity.</span>
           <span className="mt-1 block">© {new Date().getFullYear()} Americantriangle. All rights reserved.</span>
@@ -26,16 +27,8 @@ export function SiteFooter() {
             ))}
           </ul>
         </nav>
-        <a
-          href="#top"
-          className="inline-flex min-h-11 w-fit items-center gap-2 rounded-full border border-white/40 px-5 text-xs font-medium uppercase tracking-[0.14em] text-band transition-colors hover:border-band md:justify-self-end"
-        >
-          Back to top
-          <svg viewBox="0 0 16 16" aria-hidden="true" className="size-3.5">
-            <path d="M8 12.5V3.5M8 3.5 4 7.5M8 3.5l4 4" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </a>
       </div>
+      <BackToTop />
     </footer>
   );
 }

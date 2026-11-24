@@ -1,4 +1,5 @@
 import { CatalogList, CtaBand, PageHero, Scenario, Section } from "@/components/marketing/sections";
+import { ServiceJsonLd } from "@/components/seo/json-ld";
 import type { CatalogItem } from "@/config/catalog";
 import type { InquiryType } from "@/services/leads";
 
@@ -22,8 +23,10 @@ export function OfferPage({
   parentHref?: string;
 }) {
   const parent = parentHref || items[0]?.href.split("/").slice(0, 3).join("/") || "/";
+  const path = items[0]?.href;
   return (
     <>
+      {path ? <ServiceJsonLd name={title} description={lede} path={path} /> : null}
       <PageHero
         eyebrow={eyebrow}
         title={title}

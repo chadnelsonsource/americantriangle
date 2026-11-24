@@ -4,7 +4,7 @@ import { PageHero, Section } from "@/components/marketing/sections";
 import { pageMetadata } from "@/config/seo";
 import { searchInsights } from "@/content/insights";
 
-export const metadata = pageMetadata("Search articles", "Search published Americantriangle articles.", "/insights/search");
+export const metadata = pageMetadata("Search articles", "Search published Americantriangle articles. This page is a filter and is not indexed.", "/insights/search", { index: false });
 
 export default async function InsightSearchPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   const params = await searchParams;

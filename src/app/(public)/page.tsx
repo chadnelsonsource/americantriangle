@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { BlogCard, FeatureCard, SolutionCard } from "@/components/marketing/cards";
 import { FaqList } from "@/components/marketing/faq";
@@ -9,7 +10,14 @@ import { notes, readingMinutes } from "@/content/notes";
 import { brandBridge, brandPhilosophy } from "@/config/brand";
 import { pillars } from "@/config/catalog";
 import { industries } from "@/config/industries";
+import { pageMetadata } from "@/config/seo";
 import { site } from "@/config/site";
+
+export const metadata: Metadata = pageMetadata(
+  "The human layer behind reliable AI",
+  site.description,
+  "/",
+);
 
 const capabilities = [
   ["/services/data/annotation", "Data annotation"],
@@ -65,11 +73,14 @@ const quality = [
 export default function HomePage() {
   return (
     <div className="bg-canvas text-ink">
-      <OrganizationJsonLd />
       <section className="relative isolate overflow-hidden bg-[#07111f] text-white">
         <img
           src="/images/editorial/hero-engineers.jpg"
-          alt="Engineers reviewing equipment in a server room."
+          alt="Engineers reviewing equipment in a server room. This is not an Americantriangle team or facility."
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <HeroReel />
@@ -294,12 +305,3 @@ export default function HomePage() {
   );
 }
 
-function OrganizationJsonLd() {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: site.name,
-    description: site.description,
-  };
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
-}

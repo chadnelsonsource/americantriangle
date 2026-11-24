@@ -45,7 +45,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="hidden items-center gap-2 md:flex">
-          <ButtonLink href="/consultation" variant="accent" className="rounded-full px-5">
+          <ButtonLink href="/consultation" variant="accent" className="rounded-full bg-[#00b5e1] px-5 text-white hover:bg-[#0098c2]">
             Request a consultation
           </ButtonLink>
           <ThemeToggle />

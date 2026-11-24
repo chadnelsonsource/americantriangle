@@ -57,7 +57,7 @@ export function HeroReel() {
           autoPlay={index === 0}
           muted
           playsInline
-          preload="auto"
+          preload={index === 0 ? "auto" : "none"}
           poster={clip.poster}
           aria-hidden="true"
           onEnded={() => {

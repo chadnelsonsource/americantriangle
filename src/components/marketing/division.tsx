@@ -1,5 +1,6 @@
 import { FeatureCard } from "@/components/marketing/cards";
 import { CatalogList, CtaBand, PageHero, Scenario, Section } from "@/components/marketing/sections";
+import { ServiceJsonLd } from "@/components/seo/json-ld";
 import type { CatalogItem } from "@/config/catalog";
 
 type Point = { title: string; body: string };
@@ -8,6 +9,7 @@ export function DivisionOverview({
   eyebrow,
   title,
   lede,
+  path,
   crumbs,
   capabilityTitle,
   capabilityLede,
@@ -26,6 +28,7 @@ export function DivisionOverview({
   eyebrow: string;
   title: string;
   lede: string;
+  path: string;
   crumbs: readonly { href?: string; label: string }[];
   capabilityTitle: string;
   capabilityLede: string;
@@ -43,6 +46,7 @@ export function DivisionOverview({
 }) {
   return (
     <>
+      <ServiceJsonLd name={title} description={lede} path={path} />
       <PageHero eyebrow={eyebrow} title={title} lede={lede} crumbs={crumbs} />
       <Section eyebrow="Capabilities" title={capabilityTitle} lede={capabilityLede}>
         <ul className="grid gap-4 md:grid-cols-2">

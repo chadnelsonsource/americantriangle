@@ -15,7 +15,15 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   const { category } = await params;
   const match = categoryBySlug(category);
   if (!match) return {};
-  return pageMetadata(match.label, `Published articles in ${match.label}.`, `/insights/category/${match.slug}`);
+  const published = insightsInCategory(match.slug).length > 0;
+  return pageMetadata(
+    match.label,
+    published
+      ? `Published Americantriangle articles in ${match.label}.`
+      : `No published Americantriangle article is in ${match.label} yet.`,
+    `/insights/category/${match.slug}`,
+    { index: published },
+  );
 }
 
 export default async function InsightCategoryPage({ params }: { params: Promise<{ category: string }> }) {
